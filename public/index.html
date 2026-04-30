@@ -10,9 +10,7 @@
         href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
     <style>
-        /* ════════════════════════════════
-   RESET + TOKENS
-════════════════════════════════ */
+        /* ═══ RESET + TOKENS ═══ */
         *,
         *::before,
         *::after {
@@ -25,7 +23,6 @@
             scroll-behavior: smooth
         }
 
-        /* Landing / App tokens */
         :root {
             --green: #1D9E75;
             --green-dark: #0F6E56;
@@ -36,7 +33,6 @@
             --gray: #6B6B6B;
             --gray-light: #F2F1EE;
             --border: #E4E3DF;
-            /* Admin tokens */
             --abg: #0A0C0F;
             --asurf: #111318;
             --asurf2: #181C22;
@@ -66,7 +62,6 @@
             -webkit-font-smoothing: antialiased
         }
 
-        /* ════ PAGE ROUTER ════ */
         .page {
             display: none
         }
@@ -98,9 +93,19 @@
             background: var(--abg)
         }
 
-        /* ════════════════════════════════
-   LANDING + APP (original styles)
-════════════════════════════════ */
+        #page-auth {
+            display: none
+        }
+
+        #page-auth.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: var(--white)
+        }
+
+        /* ═══ NAV ═══ */
         nav {
             display: flex;
             align-items: center;
@@ -174,10 +179,6 @@
             font-size: 14px !important
         }
 
-        .nav-cta:hover {
-            opacity: .85
-        }
-
         .nav-app-badge {
             font-size: 11px;
             background: var(--green-light);
@@ -223,6 +224,7 @@
             background: var(--gray-light)
         }
 
+        /* ═══ HERO ═══ */
         .hero {
             max-width: 780px;
             margin: 0 auto;
@@ -289,6 +291,7 @@
             color: var(--gray)
         }
 
+        /* ═══ DEMO ═══ */
         .demo-preview {
             max-width: 700px;
             margin: 3rem auto 0;
@@ -399,7 +402,8 @@
         .demo-output {
             background: var(--green-light);
             border-radius: 10px;
-            padding: 12px 14px
+            padding: 12px 14px;
+            transition: opacity .3s
         }
 
         .demo-output-tag {
@@ -417,6 +421,7 @@
             line-height: 1.6
         }
 
+        /* ═══ SECTIONS ═══ */
         .social-proof {
             max-width: 900px;
             margin: 5rem auto 0;
@@ -693,6 +698,7 @@
             color: var(--gray)
         }
 
+        /* ═══ PRICING ═══ */
         .pricing {
             max-width: 780px;
             margin: 7rem auto 0;
@@ -826,6 +832,7 @@
             opacity: .85
         }
 
+        /* ═══ FAQ ═══ */
         .faq {
             max-width: 640px;
             margin: 7rem auto 0;
@@ -942,7 +949,6 @@
             color: var(--gray)
         }
 
-        /* footer admin link invisível */
         .footer-admin-link {
             font-size: 10px;
             color: var(--border);
@@ -955,7 +961,7 @@
             opacity: .7
         }
 
-        /* ── APP ── */
+        /* ═══ APP ═══ */
         #view-app {
             max-width: 700px;
             margin: 0 auto;
@@ -1290,28 +1296,179 @@
             border-radius: 20px
         }
 
-        @media(max-width:600px) {
-            nav {
-                padding: 1rem 4%
-            }
-
-            .nav-links {
-                display: none
-            }
-
-            .demo-input-row {
-                grid-template-columns: 1fr
-            }
-
-            footer {
-                flex-direction: column;
-                align-items: flex-start
-            }
+        /* ═══ AUTH (cadastro/login usuário) ═══ */
+        .auth-box {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            width: 420px;
+            max-width: 90vw;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, .06)
         }
 
-        /* ════════════════════════════════
-   LOGIN ADMIN
-════════════════════════════════ */
+        .auth-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 2rem
+        }
+
+        .auth-mark {
+            width: 34px;
+            height: 34px;
+            background: var(--green);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .auth-mark svg {
+            width: 16px;
+            height: 16px;
+            stroke: #fff;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round
+        }
+
+        .auth-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 20px;
+            color: var(--black)
+        }
+
+        .auth-sub {
+            font-size: 13px;
+            color: var(--gray);
+            font-weight: 300;
+            margin-top: 2px
+        }
+
+        .auth-tab-bar {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.5rem
+        }
+
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: .6rem;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            color: var(--gray);
+            transition: all .15s
+        }
+
+        .auth-tab.active {
+            color: var(--green);
+            border-bottom-color: var(--green)
+        }
+
+        .auth-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--gray);
+            display: block;
+            margin-bottom: 6px
+        }
+
+        .auth-input {
+            width: 100%;
+            background: var(--gray-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: .75rem 1rem;
+            font-size: 13px;
+            color: var(--black);
+            font-family: 'Geist', sans-serif;
+            outline: none;
+            margin-bottom: 1rem;
+            transition: border-color .15s
+        }
+
+        .auth-input:focus {
+            border-color: var(--green-mid)
+        }
+
+        .auth-input::placeholder {
+            color: var(--gray)
+        }
+
+        .auth-btn {
+            width: 100%;
+            background: var(--green);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: .85rem;
+            font-size: 14px;
+            font-family: 'Geist', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity .15s
+        }
+
+        .auth-btn:hover {
+            opacity: .85
+        }
+
+        .auth-btn:disabled {
+            opacity: .45;
+            cursor: not-allowed
+        }
+
+        .auth-error {
+            background: #FEF2F2;
+            border: 1px solid #FCA5A5;
+            border-radius: 6px;
+            padding: .6rem 1rem;
+            font-size: 12px;
+            color: #B91C1C;
+            margin-bottom: 1rem;
+            display: none
+        }
+
+        .auth-error.show {
+            display: block
+        }
+
+        .auth-success {
+            background: var(--green-light);
+            border: 1px solid var(--green-mid);
+            border-radius: 6px;
+            padding: .6rem 1rem;
+            font-size: 12px;
+            color: var(--green-dark);
+            margin-bottom: 1rem;
+            display: none
+        }
+
+        .auth-success.show {
+            display: block
+        }
+
+        .auth-back {
+            display: block;
+            text-align: center;
+            margin-top: 1.25rem;
+            font-size: 12px;
+            color: var(--gray);
+            cursor: pointer;
+            text-decoration: none
+        }
+
+        .auth-back:hover {
+            color: var(--green)
+        }
+
+        /* ═══ ADMIN LOGIN ═══ */
         .login-box {
             background: var(--asurf);
             border: 1px solid var(--aborder2);
@@ -1452,7 +1609,6 @@
             margin-top: .75rem
         }
 
-        /* lockout overlay */
         .lockout-msg {
             background: var(--ar-bg);
             border: 1px solid var(--ar);
@@ -1481,9 +1637,7 @@
             margin-top: .5rem
         }
 
-        /* ════════════════════════════════
-   ADMIN DASHBOARD
-════════════════════════════════ */
+        /* ═══ ADMIN DASHBOARD ═══ */
         .a-sidebar {
             width: 220px;
             min-height: 100vh;
@@ -2441,16 +2595,118 @@
             opacity: 1;
             transform: translateY(0)
         }
+
+        .nav-hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            color: var(--black)
+        }
+
+        .nav-hamburger svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            fill: none
+        }
+
+        .nav-mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(250, 250, 248, .98);
+            z-index: 300;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            backdrop-filter: blur(8px)
+        }
+
+        .nav-mobile-menu.open {
+            display: flex
+        }
+
+        .nav-mobile-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 26px;
+            color: var(--gray)
+        }
+
+        .nav-mobile-menu a,
+        .nav-mobile-menu span {
+            font-size: 20px;
+            color: var(--black);
+            text-decoration: none;
+            cursor: pointer
+        }
+
+        .nav-mobile-menu .nav-cta {
+            background: var(--green);
+            color: #fff;
+            padding: 12px 32px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 500
+        }
+
+        @media(max-width:640px) {
+            nav {
+                padding: 1rem 4%
+            }
+
+            .nav-links {
+                display: none
+            }
+
+            .nav-hamburger {
+                display: block
+            }
+
+            .demo-input-row {
+                grid-template-columns: 1fr
+            }
+
+            footer {
+                flex-direction: column;
+                align-items: flex-start
+            }
+
+            .a-sidebar {
+                display: none
+            }
+
+            .a-main {
+                margin-left: 0
+            }
+
+            .a-metrics-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .a-chart-row {
+                grid-template-columns: 1fr
+            }
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- ═══════════════════════════════════════
-     PAGE 1 — LANDING
-═══════════════════════════════════════ -->
+    <!-- PAGE 1 — LANDING -->
     <div id="page-landing" class="page active">
-
         <nav id="main-nav">
             <div class="nav-logo" onclick="showLanding()">
                 <div class="nav-mark"><svg viewBox="0 0 16 16">
@@ -2464,13 +2720,32 @@
                 <a href="#features">Features</a>
                 <a href="#precos">Preços</a>
                 <a href="#faq">FAQ</a>
-                <a onclick="showApp()" class="nav-cta" style="cursor:pointer">Abrir app →</a>
+                <a onclick="handleAppAccess()" class="nav-cta" style="cursor:pointer">Abrir app →</a>
             </div>
             <div class="nav-links" id="nav-app-links" style="display:none">
                 <span class="nav-app-badge">App · beta</span>
-                <a onclick="showLanding()" style="cursor:pointer">← Voltar ao site</a>
+                <span id="nav-user-info" style="font-size:13px;color:var(--gray)"></span>
+                <a onclick="showLanding()" style="cursor:pointer;font-size:14px;color:var(--gray)">← Voltar ao site</a>
+                <a onclick="doUserLogout()" style="cursor:pointer;font-size:13px;color:var(--gray)">Sair</a>
             </div>
+            <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+                <svg viewBox="0 0 24 24">
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <line x1="3" y1="12" x2="21" y2="12" />
+                    <line x1="3" y1="18" x2="21" y2="18" />
+                </svg>
+            </button>
         </nav>
+
+        <!-- MOBILE MENU -->
+        <div class="nav-mobile-menu" id="nav-mobile-menu">
+            <button class="nav-mobile-close" onclick="toggleMobileMenu()">✕</button>
+            <a href="#como-funciona" onclick="toggleMobileMenu()">Como funciona</a>
+            <a href="#features" onclick="toggleMobileMenu()">Features</a>
+            <a href="#precos" onclick="toggleMobileMenu()">Preços</a>
+            <a href="#faq" onclick="toggleMobileMenu()">FAQ</a>
+            <span class="nav-cta" onclick="toggleMobileMenu();handleAppAccess()">Abrir app →</span>
+        </div>
 
         <div id="view-landing">
             <section class="hero">
@@ -2479,7 +2754,7 @@
                 <p class="hero-sub">Cole o perfil do lead. Receba uma mensagem personalizada para Email, LinkedIn ou
                     WhatsApp em segundos — com IA que entende contexto de verdade.</p>
                 <div class="hero-actions">
-                    <button class="btn-primary" onclick="showApp()">Testar grátis — 10 mensagens</button>
+                    <button class="btn-primary" onclick="handleAppAccess()">Testar grátis — 10 mensagens</button>
                     <a href="#como-funciona" class="btn-ghost">Ver como funciona</a>
                 </div>
                 <p class="hero-note">Sem cartão de crédito · Resultado em &lt; 5 segundos</p>
@@ -2505,13 +2780,14 @@
                             <div class="demo-chip">WhatsApp</div>
                             <div class="demo-chip">Todos</div>
                         </div>
-                        <button class="demo-generate" onclick="showApp()">Gerar mensagem → (clique para testar)</button>
-                        <div class="demo-output">
+                        <button class="demo-generate" id="demo-gen-btn" onclick="runDemoAnimation()">Gerar mensagem →
+                            (clique para testar)</button>
+                        <div class="demo-output" id="demo-output-box">
                             <div class="demo-output-tag">Email gerado</div>
-                            <div class="demo-output-text"><strong>Assunto: SPIN Selling funciona — até travar no meio do
-                                    funil</strong><br><br>João, vi seus posts sobre SPIN Selling e o foco em
-                                qualificação que você está levando para a TechCorp. A maioria das dores em SaaS B2B não
-                                está na geração de lead — está na conversão depois da descoberta...</div>
+                            <div class="demo-output-text" id="demo-output-text"><strong>Assunto: SPIN Selling funciona —
+                                    até travar no meio do funil</strong><br><br>João, vi seus posts sobre SPIN Selling e
+                                o foco em qualificação que você está levando para a TechCorp. A maioria das dores em
+                                SaaS B2B não está na geração de lead — está na conversão depois da descoberta...</div>
                         </div>
                     </div>
                 </div>
@@ -2706,7 +2982,8 @@
                             <li>Email, LinkedIn, WhatsApp</li>
                             <li>4 tons de abordagem</li>
                             <li>Histórico da sessão</li>
-                        </ul><button class="price-btn price-btn-ghost" onclick="showApp()">Começar grátis</button>
+                        </ul>
+                        <button class="price-btn price-btn-ghost" onclick="handleAppAccess()">Começar grátis</button>
                     </div>
                     <div class="price-card featured">
                         <div class="price-badge">Mais popular</div>
@@ -2719,7 +2996,8 @@
                             <li>Templates salvos</li>
                             <li>Histórico completo</li>
                             <li>Suporte prioritário</li>
-                        </ul><button class="price-btn price-btn-solid" onclick="showApp()">Assinar Pro</button>
+                        </ul>
+                        <button class="price-btn price-btn-solid" onclick="handleCheckout('pro')">Assinar Pro</button>
                     </div>
                     <div class="price-card">
                         <div class="price-plan">Time</div>
@@ -2731,7 +3009,8 @@
                             <li>Dashboard de uso</li>
                             <li>Webhook / API (em breve)</li>
                             <li>Onboarding incluído</li>
-                        </ul><button class="price-btn price-btn-ghost" onclick="showApp()">Falar com time</button>
+                        </ul>
+                        <button class="price-btn price-btn-ghost" onclick="handleCheckout('time')">Assinar Time</button>
                     </div>
                 </div>
             </section>
@@ -2765,28 +3044,31 @@
                     <div class="faq-a">Sim. Sem fidelidade, sem burocracia. Cancele pelo painel com um clique. O acesso
                         continua até o fim do período pago.</div>
                 </div>
+                <div class="faq-item">
+                    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Meus dados de leads ficam
+                        armazenados?</div>
+                    <div class="faq-a">Não. Os perfis que você cola são usados apenas para gerar a mensagem e nunca são
+                        armazenados em nossos servidores.</div>
+                </div>
             </section>
 
             <section class="cta-bottom">
                 <div class="cta-box">
                     <h2>Pronto para prospectar<br><em>de verdade?</em></h2>
                     <p>Comece grátis com 10 mensagens. Sem cartão de crédito.</p>
-                    <button class="btn-primary" onclick="showApp()">Abrir o app agora →</button>
+                    <button class="btn-primary" onclick="handleAppAccess()">Abrir o app agora →</button>
                 </div>
             </section>
 
             <footer>
                 <span class="footer-logo">ProspectPulse</span>
                 <div class="footer-links">
-                    <a href="#">Termos</a>
-                    <a href="#">Privacidade</a>
-                    <a href="#">Contato</a>
-                    <!-- Link oculto admin: visível só se você souber que existe -->
-                    <a onclick="goToLogin()" class="footer-admin-link" title="Admin">·</a>
+                    <a href="#">Termos</a><a href="#">Privacidade</a><a href="#">Contato</a>
+                    <a onclick="goToAdminLogin()" class="footer-admin-link" title="Admin">·</a>
                 </div>
-                <span class="footer-copy">© 2025 ProspectPulse</span>
+                <span class="footer-copy">© 2026 ProspectPulse</span>
             </footer>
-        </div><!-- /view-landing -->
+        </div>
 
         <!-- APP VIEW -->
         <div id="view-app" style="display:none">
@@ -2794,38 +3076,93 @@
                 <h2>Gerar mensagem de prospecção</h2>
                 <p>Cole o perfil do lead, escolha o canal e o tom — a IA cuida do resto.</p>
             </div>
-            <div class="credits-bar"><span>Créditos restantes: <strong id="credits-display">10</strong> / 10</span><a
-                    onclick="showLanding()">Fazer upgrade para Pro</a></div>
-            <div class="form-block"><label class="form-label">Perfil do lead</label><textarea class="form-textarea"
-                    id="lead-input" rows="4"
+            <div class="credits-bar">
+                <span>Créditos restantes: <strong id="credits-display">10</strong> / <span
+                        id="credits-max-display">10</span></span>
+                <a onclick="handleCheckout('pro')">Fazer upgrade para Pro</a>
+            </div>
+            <div class="form-block">
+                <label class="form-label">Perfil do lead</label>
+                <textarea class="form-textarea" id="lead-input" rows="4"
                     placeholder="Ex: João Silva, Head de Vendas na TechCorp (200 funcionários, SaaS B2B). LinkedIn: focado em outbound, posts sobre metodologia SPIN. Site: techcorp.com.br — CRM para e-commerce."></textarea>
             </div>
-            <div class="form-block"><label class="form-label">Seu produto / serviço</label><textarea
-                    class="form-textarea" id="product-input" rows="2"
+            <div class="form-block">
+                <label class="form-label">Seu produto / serviço</label>
+                <textarea class="form-textarea" id="product-input" rows="2"
                     placeholder="Ex: Agência de growth especializada em aumentar conversão de leads inbound para SaaS B2B. Cases: +45% conversão média em 90 dias."></textarea>
             </div>
-            <div class="form-block"><label class="form-label">Canal</label>
-                <div class="pill-row" id="channel-row"><button class="pill active" data-ch="email">Email</button><button
-                        class="pill" data-ch="linkedin">LinkedIn</button><button class="pill"
-                        data-ch="whatsapp">WhatsApp</button><button class="pill" data-ch="todos">Todos os
-                        canais</button></div>
+            <div class="form-block">
+                <label class="form-label">Canal</label>
+                <div class="pill-row" id="channel-row">
+                    <button class="pill active" data-ch="email">Email</button>
+                    <button class="pill" data-ch="linkedin">LinkedIn</button>
+                    <button class="pill" data-ch="whatsapp">WhatsApp</button>
+                    <button class="pill" data-ch="todos">Todos os canais</button>
+                </div>
             </div>
-            <div class="form-block"><label class="form-label">Tom</label>
-                <div class="pill-row" id="tone-row"><button class="pill tone-active"
-                        data-tone="consultivo">Consultivo</button><button class="pill"
-                        data-tone="direto">Direto</button><button class="pill" data-tone="casual">Casual</button><button
-                        class="pill" data-tone="provocador">Provocador</button></div>
+            <div class="form-block">
+                <label class="form-label">Tom</label>
+                <div class="pill-row" id="tone-row">
+                    <button class="pill tone-active" data-tone="consultivo">Consultivo</button>
+                    <button class="pill" data-tone="direto">Direto</button>
+                    <button class="pill" data-tone="casual">Casual</button>
+                    <button class="pill" data-tone="provocador">Provocador</button>
+                </div>
             </div>
             <button class="generate-btn" id="gen-btn" onclick="generate()">Gerar mensagem →</button>
             <div id="output-area"></div>
             <div id="history-area"></div>
         </div>
+    </div>
 
-    </div><!-- /page-landing -->
+    <!-- PAGE 2 — AUTH (cadastro/login usuário) -->
+    <div id="page-auth">
+        <div class="auth-box">
+            <div class="auth-logo">
+                <div class="auth-mark"><svg viewBox="0 0 16 16">
+                        <polyline points="2,9 8,3 14,9" />
+                        <rect x="5" y="9" width="6" height="5" rx="1" />
+                    </svg></div>
+                <div>
+                    <div class="auth-title">ProspectPulse</div>
+                    <div class="auth-sub">Crie sua conta gratuita</div>
+                </div>
+            </div>
+            <div class="auth-tab-bar">
+                <div class="auth-tab active" onclick="authSwitchTab('register')">Criar conta</div>
+                <div class="auth-tab" onclick="authSwitchTab('login')">Entrar</div>
+            </div>
 
-    <!-- ═══════════════════════════════════════
-     PAGE 2 — LOGIN ADMIN
-═══════════════════════════════════════ -->
+            <!-- REGISTER -->
+            <div id="auth-register-form">
+                <div class="auth-error" id="auth-reg-error"></div>
+                <div class="auth-success" id="auth-reg-success"></div>
+                <label class="auth-label">Nome</label>
+                <input class="auth-input" type="text" id="reg-name" placeholder="Seu nome completo">
+                <label class="auth-label">Email</label>
+                <input class="auth-input" type="email" id="reg-email" placeholder="voce@empresa.com">
+                <label class="auth-label">Senha</label>
+                <input class="auth-input" type="password" id="reg-pass" placeholder="Mínimo 8 caracteres"
+                    onkeydown="if(event.key==='Enter')doRegister()">
+                <button class="auth-btn" id="reg-btn" onclick="doRegister()">Criar conta grátis</button>
+            </div>
+
+            <!-- LOGIN -->
+            <div id="auth-login-form" style="display:none">
+                <div class="auth-error" id="auth-login-error"></div>
+                <label class="auth-label">Email</label>
+                <input class="auth-input" type="email" id="login-email" placeholder="voce@empresa.com">
+                <label class="auth-label">Senha</label>
+                <input class="auth-input" type="password" id="login-pass-user" placeholder="Sua senha"
+                    onkeydown="if(event.key==='Enter')doUserLogin()">
+                <button class="auth-btn" id="login-btn" onclick="doUserLogin()">Entrar</button>
+            </div>
+
+            <a class="auth-back" onclick="showLanding()">← Voltar ao site</a>
+        </div>
+    </div>
+
+    <!-- PAGE 3 — LOGIN ADMIN -->
     <div id="page-login">
         <div class="login-box">
             <div class="login-logo">
@@ -2837,33 +3174,27 @@
                     <div class="login-sub">// painel administrativo</div>
                 </div>
             </div>
-
             <div id="login-form-area">
                 <div class="login-error" id="login-error">Credenciais incorretas. Tente novamente.</div>
-                <label class="login-label">Usuário</label>
-                <input class="login-input" type="text" id="login-user" placeholder="admin" autocomplete="off">
+                <label class="login-label">Email</label>
+                <input class="login-input" type="email" id="admin-email" placeholder="admin@prospectpulse.app"
+                    autocomplete="off">
                 <label class="login-label">Senha</label>
-                <input class="login-input" type="password" id="login-pass" placeholder="••••••••"
-                    onkeydown="if(event.key==='Enter')doLogin()">
-                <button class="login-btn" onclick="doLogin()">ENTRAR →</button>
+                <input class="login-input" type="password" id="admin-pass" placeholder="••••••••"
+                    onkeydown="if(event.key==='Enter')doAdminLogin()">
+                <button class="login-btn" onclick="doAdminLogin()">ENTRAR →</button>
                 <div class="login-attempt" id="login-attempt-txt"></div>
             </div>
-
             <div class="lockout-msg" id="lockout-msg">
                 <p>🔒 Acesso bloqueado por tentativas excessivas.<br>Aguarde para tentar novamente.</p>
                 <div class="lockout-countdown" id="lockout-timer">15:00</div>
             </div>
-
-            <a class="login-back" onclick="backToLanding()">← Voltar ao site</a>
+            <a class="login-back" onclick="showLanding()">← Voltar ao site</a>
         </div>
     </div>
 
-    <!-- ═══════════════════════════════════════
-     PAGE 3 — ADMIN DASHBOARD
-═══════════════════════════════════════ -->
+    <!-- PAGE 4 — ADMIN DASHBOARD -->
     <div id="page-admin">
-
-        <!-- SIDEBAR -->
         <aside class="a-sidebar">
             <div class="a-sidebar-logo">
                 <div class="a-logo-mark"><svg viewBox="0 0 24 24">
@@ -2871,7 +3202,7 @@
                     </svg></div>
                 <div>
                     <div class="a-logo-text">ProspectPulse</div>
-                    <div class="a-logo-badge">ADMIN v1.0</div>
+                    <div class="a-logo-badge">ADMIN v2.0</div>
                 </div>
             </div>
             <div class="a-nav-section">
@@ -2888,30 +3219,20 @@
                         <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
                         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                     </svg>Clientes</a>
-                <a class="a-nav-item" onclick="showAdminView('assinaturas',this)"><svg viewBox="0 0 24 24">
+                <a class="a-nav-item" onclick="showAdminView('pagamentos',this)"><svg viewBox="0 0 24 24">
                         <rect x="1" y="4" width="22" height="16" rx="2" />
                         <line x1="1" y1="10" x2="23" y2="10" />
-                    </svg>Assinaturas</a>
-                <a class="a-nav-item" onclick="showAdminView('faturamento',this)"><svg viewBox="0 0 24 24">
-                        <line x1="12" y1="1" x2="12" y2="23" />
-                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                    </svg>Faturamento</a>
-            </div>
-            <div class="a-nav-section">
-                <div class="a-nav-label">Produto</div>
+                    </svg>Pagamentos</a>
                 <a class="a-nav-item" onclick="showAdminView('uso',this)"><svg viewBox="0 0 24 24">
                         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
                     </svg>Uso / Créditos</a>
-                <a class="a-nav-item" onclick="showAdminView('planos',this)"><svg viewBox="0 0 24 24">
-                        <polygon
-                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                    </svg>Planos</a>
             </div>
             <div class="a-nav-section">
                 <div class="a-nav-label">Segurança</div>
-                <a class="a-nav-item" onclick="showAdminView('seguranca',this)"><svg viewBox="0 0 24 24">
+                <a class="a-nav-item" onclick="showAdminView('seguranca',this)" id="sec-nav-item"><svg
+                        viewBox="0 0 24 24">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    </svg>Segurança<span class="a-nav-badge">3</span></a>
+                    </svg>Segurança</a>
                 <a class="a-nav-item" onclick="showAdminView('logs',this)"><svg viewBox="0 0 24 24">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                         <polyline points="14 2 14 8 20 8" />
@@ -2921,17 +3242,16 @@
             </div>
             <div class="a-sidebar-footer">
                 <div class="a-admin-info">
-                    <div class="a-admin-avatar">CR</div>
+                    <div class="a-admin-avatar" id="admin-avatar">CR</div>
                     <div>
-                        <div class="a-admin-name">Christian R.</div>
+                        <div class="a-admin-name" id="admin-name-display">Admin</div>
                         <div class="a-admin-role">Super Admin</div>
                     </div>
                 </div>
-                <button class="a-logout-btn" onclick="doLogout()">Sair do painel</button>
+                <button class="a-logout-btn" onclick="doAdminLogout()">Sair do painel</button>
             </div>
         </aside>
 
-        <!-- MAIN -->
         <main class="a-main">
             <div class="a-topbar">
                 <div class="a-topbar-title" id="a-topbar-title">// dashboard</div>
@@ -2944,159 +3264,67 @@
 
             <!-- DASHBOARD -->
             <div class="a-view active" id="a-view-dashboard">
-                <div class="a-metrics-grid">
+                <div class="a-metrics-grid" id="dash-metrics">
                     <div class="a-metric-card">
                         <div class="a-metric-label">MRR</div>
-                        <div class="a-metric-value">R$4.271</div>
-                        <div class="a-metric-delta a-delta-up">↑ +18.3% vs anterior</div>
+                        <div class="a-metric-value" id="d-mrr">—</div>
                     </div>
                     <div class="a-metric-card">
                         <div class="a-metric-label">Clientes Ativos</div>
-                        <div class="a-metric-value">61</div>
-                        <div class="a-metric-delta a-delta-up">↑ +7 este mês</div>
+                        <div class="a-metric-value" id="d-active">—</div>
                     </div>
                     <div class="a-metric-card">
-                        <div class="a-metric-label">Churn Rate</div>
-                        <div class="a-metric-value">3.2%</div>
-                        <div class="a-metric-delta a-delta-down">↓ 2 cancelamentos</div>
+                        <div class="a-metric-label">Msgs Hoje</div>
+                        <div class="a-metric-value" id="d-msgs">—</div>
                     </div>
                     <div class="a-metric-card">
-                        <div class="a-metric-label">Msgs / Dia</div>
-                        <div class="a-metric-value">1.847</div>
-                        <div class="a-metric-delta a-delta-up">↑ +340 vs ontem</div>
+                        <div class="a-metric-label">IPs Bloqueados</div>
+                        <div class="a-metric-value" id="d-blocked">—</div>
                     </div>
                 </div>
                 <div class="a-chart-row">
                     <div class="a-chart-card">
-                        <div class="a-chart-title">// MRR — últimos 7 meses</div>
-                        <div class="a-mini-chart" id="a-mrr-chart"></div>
-                        <div style="height:24px"></div>
+                        <div class="a-chart-title">// Distribuição de planos</div>
+                        <div class="a-plan-dist" id="d-plan-dist"></div>
                     </div>
                     <div class="a-chart-card">
-                        <div class="a-chart-title">// Distribuição de planos</div>
-                        <div class="a-plan-dist">
-                            <div class="a-plan-row">
-                                <div class="a-plan-name">Free</div>
-                                <div class="a-plan-bar-bg">
-                                    <div class="a-plan-bar-fill" style="width:55%;background:var(--amuted2)"></div>
-                                </div>
-                                <div class="a-plan-pct">55%</div>
-                            </div>
-                            <div class="a-plan-row">
-                                <div class="a-plan-name">Pro</div>
-                                <div class="a-plan-bar-bg">
-                                    <div class="a-plan-bar-fill" style="width:35%;background:var(--ag)"></div>
-                                </div>
-                                <div class="a-plan-pct">35%</div>
-                            </div>
-                            <div class="a-plan-row">
-                                <div class="a-plan-name">Time</div>
-                                <div class="a-plan-bar-bg">
-                                    <div class="a-plan-bar-fill" style="width:10%;background:var(--ab)"></div>
-                                </div>
-                                <div class="a-plan-pct">10%</div>
-                            </div>
-                        </div>
-                        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--aborder)">
-                            <div style="font-size:11px;color:var(--amuted);font-family:var(--mono)">Conversão Free→Pro:
-                                <span style="color:var(--ag)">12.4%</span></div>
-                            <div style="font-size:11px;color:var(--amuted);font-family:var(--mono);margin-top:4px">Trial
-                                ativo: <span style="color:var(--ay)">8 usuários</span></div>
+                        <div class="a-chart-title">// Uso de tokens hoje</div>
+                        <div style="text-align:center;padding:1rem 0">
+                            <div class="a-metric-value" id="d-tokens">—</div>
+                            <div class="a-metric-sub" id="d-tokens-cost">—</div>
                         </div>
                     </div>
                 </div>
-                <div class="a-section-header"><span class="a-section-title">// Últimos eventos</span></div>
+                <div class="a-section-header"><span class="a-section-title">// Últimos eventos de segurança</span></div>
                 <div class="a-table-wrap">
-                    <table class="a-tbl">
-                        <thead>
-                            <tr>
-                                <th>Evento</th>
-                                <th>Usuário</th>
-                                <th>Plano</th>
-                                <th>Valor</th>
-                                <th>Horário</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Nova assinatura</td>
-                                <td class="a-mono">rafael.s@growthco.com</td>
-                                <td><span class="badge badge-green">Pro</span></td>
-                                <td class="a-mono">R$97</td>
-                                <td class="a-mono">14:22</td>
-                                <td><span class="badge badge-green">OK</span></td>
-                            </tr>
-                            <tr>
-                                <td>Pagamento recebido</td>
-                                <td class="a-mono">marina.c@agencia.io</td>
-                                <td><span class="badge badge-green">Pro</span></td>
-                                <td class="a-mono">R$97</td>
-                                <td class="a-mono">13:45</td>
-                                <td><span class="badge badge-green">OK</span></td>
-                            </tr>
-                            <tr>
-                                <td>Upgrade de plano</td>
-                                <td class="a-mono">thiago.l@consult.com</td>
-                                <td><span class="badge badge-blue">Time</span></td>
-                                <td class="a-mono">+R$200</td>
-                                <td class="a-mono">12:10</td>
-                                <td><span class="badge badge-green">OK</span></td>
-                            </tr>
-                            <tr>
-                                <td>Pagamento falhou</td>
-                                <td class="a-mono">joao.m@empresa.com</td>
-                                <td><span class="badge badge-yellow">Pro</span></td>
-                                <td class="a-mono">R$97</td>
-                                <td class="a-mono">11:33</td>
-                                <td><span class="badge badge-red">FALHA</span></td>
-                            </tr>
-                            <tr>
-                                <td>Cancelamento</td>
-                                <td class="a-mono">ana.b@freelancer.me</td>
-                                <td><span class="badge badge-gray">Free</span></td>
-                                <td class="a-mono">—</td>
-                                <td class="a-mono">09:05</td>
-                                <td><span class="badge badge-gray">CHURNED</span></td>
-                            </tr>
-                            <tr>
-                                <td>Login suspeito bloqueado</td>
-                                <td class="a-mono">unknown@tempmail.io</td>
-                                <td>—</td>
-                                <td class="a-mono">—</td>
-                                <td class="a-mono">08:41</td>
-                                <td><span class="badge badge-red">BLOQUEADO</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div id="d-events-list"></div>
                 </div>
             </div>
 
             <!-- CLIENTES -->
             <div class="a-view" id="a-view-clientes">
                 <div class="a-section-header">
-                    <div><span class="a-section-title">// Clientes</span><span class="a-section-count">12
-                            registros</span></div>
+                    <div><span class="a-section-title">// Clientes</span></div>
                     <div style="display:flex;gap:.5rem">
-                        <button class="a-btn-sm" onclick="exportCSV()">Exportar CSV</button>
+                        <button class="a-btn-sm" onclick="exportClientCSV()">Exportar CSV</button>
                         <button class="a-btn-sm primary" onclick="aOpenModal('ma-add-client')">+ Novo Cliente</button>
                     </div>
                 </div>
                 <div class="a-filters">
                     <input class="a-filter-input" type="text" placeholder="Buscar nome ou email..."
-                        id="a-search-clients" oninput="aFilterClients()">
-                    <select class="a-filter-select" id="a-filter-plan" onchange="aFilterClients()">
+                        id="a-search-clients" oninput="loadClients()">
+                    <select class="a-filter-select" id="a-filter-plan" onchange="loadClients()">
                         <option value="">Todos os planos</option>
-                        <option>Free</option>
-                        <option>Pro</option>
-                        <option>Time</option>
+                        <option>free</option>
+                        <option>pro</option>
+                        <option>time</option>
                     </select>
-                    <select class="a-filter-select" id="a-filter-status" onchange="aFilterClients()">
+                    <select class="a-filter-select" id="a-filter-status" onchange="loadClients()">
                         <option value="">Todos os status</option>
-                        <option>Ativo</option>
-                        <option>Trial</option>
-                        <option>Inadimplente</option>
-                        <option>Cancelado</option>
+                        <option>active</option>
+                        <option>trial</option>
+                        <option>suspended</option>
+                        <option>cancelled</option>
                     </select>
                 </div>
                 <div class="a-table-wrap">
@@ -3107,7 +3335,7 @@
                                 <th>Plano</th>
                                 <th>Status</th>
                                 <th>Créditos</th>
-                                <th>MRR</th>
+                                <th>Empresa</th>
                                 <th>Desde</th>
                                 <th>Ações</th>
                             </tr>
@@ -3117,268 +3345,38 @@
                 </div>
             </div>
 
-            <!-- ASSINATURAS -->
-            <div class="a-view" id="a-view-assinaturas">
+            <!-- PAGAMENTOS -->
+            <div class="a-view" id="a-view-pagamentos">
                 <div class="a-metrics-grid" style="grid-template-columns:repeat(3,1fr)">
                     <div class="a-metric-card">
-                        <div class="a-metric-label">Assinaturas Ativas</div>
-                        <div class="a-metric-value">41</div>
-                        <div class="a-metric-sub">28 Pro · 6 Time · 7 Trial</div>
+                        <div class="a-metric-label">MRR</div>
+                        <div class="a-metric-value" id="p-mrr">—</div>
                     </div>
                     <div class="a-metric-card">
-                        <div class="a-metric-label">Taxa de Renovação</div>
-                        <div class="a-metric-value">92.7%</div>
-                        <div class="a-metric-delta a-delta-up">↑ 38 renovações</div>
+                        <div class="a-metric-label">Pendente</div>
+                        <div class="a-metric-value" id="p-pending">—</div>
                     </div>
                     <div class="a-metric-card">
-                        <div class="a-metric-label">Próx. 7 dias</div>
-                        <div class="a-metric-value">14</div>
-                        <div class="a-metric-sub">Total: R$1.358</div>
+                        <div class="a-metric-label">Total Trans.</div>
+                        <div class="a-metric-value" id="p-total">—</div>
                     </div>
                 </div>
-                <div class="a-section-header"><span class="a-section-title">// Assinaturas ativas</span><button
-                        class="a-btn-sm" onclick="aToast('Exportado!')">Exportar</button></div>
+                <div class="a-section-header"><span class="a-section-title">// Histórico de pagamentos</span></div>
                 <div class="a-table-wrap">
                     <table class="a-tbl">
                         <thead>
                             <tr>
+                                <th>ID MP</th>
                                 <th>Cliente</th>
-                                <th>Plano</th>
+                                <th>Descrição</th>
                                 <th>Valor</th>
-                                <th>Próx. Cobrança</th>
                                 <th>Método</th>
+                                <th>Data</th>
                                 <th>Status</th>
-                                <th>Ação</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="a-mono">rafael.s@growthco.com</td>
-                                <td><span class="badge badge-green">Pro</span></td>
-                                <td class="a-mono">R$97</td>
-                                <td class="a-mono">28/05/2025</td>
-                                <td>Cartão</td>
-                                <td><span class="badge badge-green">Ativo</span></td>
-                                <td><button class="a-btn-sm" onclick="aToast('Pausado!')">Pausar</button></td>
-                            </tr>
-                            <tr>
-                                <td class="a-mono">thiago.l@consult.com</td>
-                                <td><span class="badge badge-blue">Time</span></td>
-                                <td class="a-mono">R$297</td>
-                                <td class="a-mono">15/05/2025</td>
-                                <td>Pix</td>
-                                <td><span class="badge badge-green">Ativo</span></td>
-                                <td><button class="a-btn-sm" onclick="aToast('Pausado!')">Pausar</button></td>
-                            </tr>
-                            <tr>
-                                <td class="a-mono">joao.m@empresa.com</td>
-                                <td><span class="badge badge-yellow">Pro</span></td>
-                                <td class="a-mono">R$97</td>
-                                <td class="a-mono">—</td>
-                                <td>Cartão</td>
-                                <td><span class="badge badge-red">Inadimplente</span></td>
-                                <td><button class="a-btn-sm danger" onclick="aToast('Email enviado!')">Cobrar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="a-mono">clara.f@startup.co</td>
-                                <td><span class="badge badge-yellow">Trial</span></td>
-                                <td class="a-mono">R$97</td>
-                                <td class="a-mono">30/05/2025</td>
-                                <td>Pix</td>
-                                <td><span class="badge badge-yellow">Trial</span></td>
-                                <td><button class="a-btn-sm primary"
-                                        onclick="aToast('Convertido para Pro!')">Converter</button></td>
-                            </tr>
-                            <tr>
-                                <td class="a-mono">pedro.a@vendas.me</td>
-                                <td><span class="badge badge-blue">Time</span></td>
-                                <td class="a-mono">R$297</td>
-                                <td class="a-mono">10/05/2025</td>
-                                <td>Cartão</td>
-                                <td><span class="badge badge-green">Ativo</span></td>
-                                <td><button class="a-btn-sm" onclick="aToast('Pausado!')">Pausar</button></td>
-                            </tr>
-                        </tbody>
+                        <tbody id="a-payments-table"></tbody>
                     </table>
-                </div>
-            </div>
-
-            <!-- FATURAMENTO -->
-            <div class="a-view" id="a-view-faturamento">
-                <div class="a-metrics-grid" style="grid-template-columns:repeat(3,1fr)">
-                    <div class="a-metric-card">
-                        <div class="a-metric-label">Receita este mês</div>
-                        <div class="a-metric-value">R$4.271</div>
-                        <div class="a-metric-delta a-delta-up">↑ +18.3%</div>
-                    </div>
-                    <div class="a-metric-card">
-                        <div class="a-metric-label">Pendentes</div>
-                        <div class="a-metric-value">R$291</div>
-                        <div class="a-metric-delta a-delta-down">3 faturas em aberto</div>
-                    </div>
-                    <div class="a-metric-card">
-                        <div class="a-metric-label">Forecast 30d</div>
-                        <div class="a-metric-value">R$5.080</div>
-                        <div class="a-metric-delta a-delta-up">↑ Baseado em renovações</div>
-                    </div>
-                </div>
-                <div class="a-tab-bar">
-                    <div class="a-tab active" onclick="aTab(this,'fat-trans')">Transações</div>
-                    <div class="a-tab" onclick="aTab(this,'fat-faturas')">Faturas</div>
-                    <div class="a-tab" onclick="aTab(this,'fat-pix')">Pix / Boleto</div>
-                </div>
-                <div id="fat-trans">
-                    <div class="a-section-header"><span class="a-section-title">// Histórico</span><button
-                            class="a-btn-sm" onclick="aToast('XLSX exportado!')">Exportar XLSX</button></div>
-                    <div class="a-table-wrap">
-                        <table class="a-tbl">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Cliente</th>
-                                    <th>Descrição</th>
-                                    <th>Valor</th>
-                                    <th>Método</th>
-                                    <th>Data</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="a-mono">#TXN-0041</td>
-                                    <td class="a-mono">rafael.s</td>
-                                    <td>Assinatura Pro</td>
-                                    <td class="a-mono" style="color:var(--ag)">+R$97</td>
-                                    <td>Cartão</td>
-                                    <td class="a-mono">28/04</td>
-                                    <td><span class="badge badge-green">Pago</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="a-mono">#TXN-0040</td>
-                                    <td class="a-mono">thiago.l</td>
-                                    <td>Assinatura Time</td>
-                                    <td class="a-mono" style="color:var(--ag)">+R$297</td>
-                                    <td>Pix</td>
-                                    <td class="a-mono">28/04</td>
-                                    <td><span class="badge badge-green">Pago</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="a-mono">#TXN-0039</td>
-                                    <td class="a-mono">marina.c</td>
-                                    <td>Assinatura Pro</td>
-                                    <td class="a-mono" style="color:var(--ag)">+R$97</td>
-                                    <td>Cartão</td>
-                                    <td class="a-mono">27/04</td>
-                                    <td><span class="badge badge-green">Pago</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="a-mono">#TXN-0038</td>
-                                    <td class="a-mono">joao.m</td>
-                                    <td>Assinatura Pro</td>
-                                    <td class="a-mono" style="color:var(--ar)">R$97</td>
-                                    <td>Cartão</td>
-                                    <td class="a-mono">26/04</td>
-                                    <td><span class="badge badge-red">Falhou</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="a-mono">#TXN-0037</td>
-                                    <td class="a-mono">lucas.v</td>
-                                    <td>Reembolso</td>
-                                    <td class="a-mono" style="color:var(--ar)">-R$97</td>
-                                    <td>Cartão</td>
-                                    <td class="a-mono">23/04</td>
-                                    <td><span class="badge badge-yellow">Processando</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div id="fat-faturas" style="display:none">
-                    <div class="a-info-box"><svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10" />
-                            <line x1="12" y1="8" x2="12" y2="12" />
-                            <line x1="12" y1="16" x2="12.01" y2="16" />
-                        </svg>
-                        <p>3 faturas em aberto. Retentativa automática em 30/04.</p>
-                    </div>
-                    <div class="a-table-wrap">
-                        <table class="a-tbl">
-                            <thead>
-                                <tr>
-                                    <th>Fatura</th>
-                                    <th>Cliente</th>
-                                    <th>Valor</th>
-                                    <th>Vencimento</th>
-                                    <th>Tentativas</th>
-                                    <th>Ação</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="a-mono">#FAT-018</td>
-                                    <td class="a-mono">joao.m@empresa.com</td>
-                                    <td class="a-mono">R$97</td>
-                                    <td class="a-mono" style="color:var(--ar)">Vencida</td>
-                                    <td>2/3</td>
-                                    <td><button class="a-btn-sm danger"
-                                            onclick="aToast('Cobrança enviada!')">Cobrar</button></td>
-                                </tr>
-                                <tr>
-                                    <td class="a-mono">#FAT-019</td>
-                                    <td class="a-mono">sergio.k@digital.co</td>
-                                    <td class="a-mono">R$97</td>
-                                    <td class="a-mono" style="color:var(--ay)">01/05</td>
-                                    <td>0/3</td>
-                                    <td><button class="a-btn-sm" onclick="aToast('Lembrete enviado!')">Lembrete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="a-mono">#FAT-020</td>
-                                    <td class="a-mono">beatriz.m@mkt.me</td>
-                                    <td class="a-mono">R$97</td>
-                                    <td class="a-mono" style="color:var(--ay)">03/05</td>
-                                    <td>0/3</td>
-                                    <td><button class="a-btn-sm" onclick="aToast('Lembrete enviado!')">Lembrete</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div id="fat-pix" style="display:none">
-                    <div class="a-table-wrap">
-                        <table class="a-tbl">
-                            <thead>
-                                <tr>
-                                    <th>ID Pix</th>
-                                    <th>Cliente</th>
-                                    <th>Valor</th>
-                                    <th>Gerado</th>
-                                    <th>Expira</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="a-mono">PIX-1d8f</td>
-                                    <td class="a-mono">thiago.l</td>
-                                    <td class="a-mono">R$297</td>
-                                    <td class="a-mono">28/04 10:21</td>
-                                    <td class="a-mono">29/04 10:21</td>
-                                    <td><span class="badge badge-green">Pago</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="a-mono">PIX-7e9b</td>
-                                    <td class="a-mono">fernanda.r</td>
-                                    <td class="a-mono">R$97</td>
-                                    <td class="a-mono">28/04 13:50</td>
-                                    <td class="a-mono">29/04 13:50</td>
-                                    <td><span class="badge badge-yellow">Aguardando</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
 
@@ -3387,279 +3385,41 @@
                 <div class="a-metrics-grid">
                     <div class="a-metric-card">
                         <div class="a-metric-label">Msgs hoje</div>
-                        <div class="a-metric-value">1.847</div>
-                        <div class="a-metric-delta a-delta-up">↑ +22%</div>
+                        <div class="a-metric-value" id="u-daily">—</div>
                     </div>
                     <div class="a-metric-card">
                         <div class="a-metric-label">Tokens</div>
-                        <div class="a-metric-value">2.1M</div>
-                        <div class="a-metric-sub">Custo: ~R$38</div>
+                        <div class="a-metric-value" id="u-tokens">—</div>
+                    </div>
+                    <div class="a-metric-card">
+                        <div class="a-metric-label">Custo estimado</div>
+                        <div class="a-metric-value" id="u-cost">—</div>
                     </div>
                     <div class="a-metric-card">
                         <div class="a-metric-label">Limite zerado</div>
-                        <div class="a-metric-value">12</div>
-                        <div class="a-metric-delta a-delta-down">Usuários bloqueados</div>
-                    </div>
-                    <div class="a-metric-card">
-                        <div class="a-metric-label">Top usuário</div>
-                        <div class="a-metric-value">214</div>
-                        <div class="a-metric-sub a-mono" style="font-size:10px">thiago.l@consult.com</div>
+                        <div class="a-metric-value" id="u-zero">—</div>
                     </div>
                 </div>
-                <div class="a-section-header"><span class="a-section-title">// Uso por cliente</span><button
-                        class="a-btn-sm primary" onclick="aOpenModal('ma-add-credits')">+ Créditos</button></div>
+                <div class="a-section-header"><span class="a-section-title">// Top usuários (30 dias)</span></div>
                 <div class="a-table-wrap">
                     <table class="a-tbl">
                         <thead>
                             <tr>
-                                <th>Cliente</th>
+                                <th>Email</th>
                                 <th>Plano</th>
-                                <th>Usado</th>
-                                <th>Limite</th>
-                                <th>Barra</th>
-                                <th>Última geração</th>
-                                <th>Ação</th>
+                                <th>Msgs</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="a-mono">thiago.l@consult.com</td>
-                                <td><span class="badge badge-blue">Time</span></td>
-                                <td class="a-mono">214</td>
-                                <td>∞</td>
-                                <td>
-                                    <div style="width:80px;height:4px;background:var(--asurf3);border-radius:2px">
-                                        <div style="width:100%;height:100%;background:var(--ab);border-radius:2px">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="a-mono">há 3min</td>
-                                <td><button class="a-btn-sm" onclick="aToast('Log aberto!')">Log</button></td>
-                            </tr>
-                            <tr>
-                                <td class="a-mono">joao.m@empresa.com</td>
-                                <td><span class="badge badge-gray">Free</span></td>
-                                <td class="a-mono">10</td>
-                                <td>10</td>
-                                <td>
-                                    <div style="width:80px;height:4px;background:var(--asurf3);border-radius:2px">
-                                        <div style="width:100%;height:100%;background:var(--ar);border-radius:2px">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="a-mono">há 2h</td>
-                                <td><button class="a-btn-sm primary"
-                                        onclick="aToast('Créditos adicionados!')">+Créditos</button></td>
-                            </tr>
-                            <tr>
-                                <td class="a-mono">clara.f@startup.co</td>
-                                <td><span class="badge badge-yellow">Trial</span></td>
-                                <td class="a-mono">6</td>
-                                <td>10</td>
-                                <td>
-                                    <div style="width:80px;height:4px;background:var(--asurf3);border-radius:2px">
-                                        <div style="width:60%;height:100%;background:var(--ay);border-radius:2px"></div>
-                                    </div>
-                                </td>
-                                <td class="a-mono">há 45min</td>
-                                <td><button class="a-btn-sm" onclick="aToast('Log aberto!')">Log</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- PLANOS -->
-            <div class="a-view" id="a-view-planos">
-                <div class="a-section-header"><span class="a-section-title">// Configuração de planos</span><button
-                        class="a-btn-sm primary" onclick="aToast('Salvo!')">Salvar</button></div>
-                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem">
-                    <div class="a-metric-card" style="border-color:var(--aborder2)">
-                        <div style="font-family:var(--mono);font-size:11px;color:var(--amuted);margin-bottom:.75rem">
-                            PLANO FREE</div>
-                        <div class="a-form-group"><label class="a-form-label">Preço (R$)</label><input
-                                class="a-form-input" type="number" value="0"></div>
-                        <div class="a-form-group"><label class="a-form-label">Créditos/mês</label><input
-                                class="a-form-input" type="number" value="10"></div>
-                        <div style="font-family:var(--mono);font-size:11px;color:var(--amuted)">Clientes: <span
-                                style="color:var(--atext)">20</span></div>
-                    </div>
-                    <div class="a-metric-card" style="border-color:var(--ag)">
-                        <div style="font-family:var(--mono);font-size:11px;color:var(--ag);margin-bottom:.75rem">PLANO
-                            PRO ★</div>
-                        <div class="a-form-group"><label class="a-form-label">Preço (R$)</label><input
-                                class="a-form-input" type="number" value="97"></div>
-                        <div class="a-form-group"><label class="a-form-label">Créditos/mês</label><input
-                                class="a-form-input" type="text" value="Ilimitado"></div>
-                        <div style="font-family:var(--mono);font-size:11px;color:var(--amuted)">Clientes: <span
-                                style="color:var(--ag)">28</span></div>
-                    </div>
-                    <div class="a-metric-card" style="border-color:var(--ab)">
-                        <div style="font-family:var(--mono);font-size:11px;color:var(--ab);margin-bottom:.75rem">PLANO
-                            TIME</div>
-                        <div class="a-form-group"><label class="a-form-label">Preço (R$)</label><input
-                                class="a-form-input" type="number" value="297"></div>
-                        <div class="a-form-group"><label class="a-form-label">Max usuários</label><input
-                                class="a-form-input" type="number" value="5"></div>
-                        <div style="font-family:var(--mono);font-size:11px;color:var(--amuted)">Clientes: <span
-                                style="color:var(--ab)">6</span></div>
-                    </div>
-                </div>
-                <div class="a-section-header"><span class="a-section-title">// Cupons</span><button
-                        class="a-btn-sm primary" onclick="aOpenModal('ma-coupon')">+ Criar cupom</button></div>
-                <div class="a-table-wrap">
-                    <table class="a-tbl">
-                        <thead>
-                            <tr>
-                                <th>Código</th>
-                                <th>Desconto</th>
-                                <th>Planos</th>
-                                <th>Usos</th>
-                                <th>Expira</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="a-mono">LAUNCH50</td>
-                                <td>50% · 3 meses</td>
-                                <td>Pro, Time</td>
-                                <td class="a-mono">14/50</td>
-                                <td class="a-mono">31/05</td>
-                                <td><span class="badge badge-green">Ativo</span></td>
-                            </tr>
-                            <tr>
-                                <td class="a-mono">BETA2024</td>
-                                <td>100% · 1 mês</td>
-                                <td>Pro</td>
-                                <td class="a-mono">8/10</td>
-                                <td class="a-mono">Expirado</td>
-                                <td><span class="badge badge-gray">Inativo</span></td>
-                            </tr>
-                        </tbody>
+                        <tbody id="u-top-table"></tbody>
                     </table>
                 </div>
             </div>
 
             <!-- SEGURANÇA -->
             <div class="a-view" id="a-view-seguranca">
-                <div class="a-alert-box"><svg viewBox="0 0 24 24">
-                        <path
-                            d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
-                        <line x1="12" y1="9" x2="12" y2="13" />
-                        <line x1="12" y1="17" x2="12.01" y2="17" />
-                    </svg>
-                    <p>3 alertas ativos: 1 IP bloqueado por brute-force · 2 logins de localização incomum</p>
-                </div>
-                <div class="a-sec-grid">
-                    <div class="a-sec-card alert">
-                        <div class="a-sec-icon">🚨</div>
-                        <div class="a-sec-title">IPs Bloqueados</div>
-                        <div class="a-sec-value" style="color:var(--ar)">3</div>
-                        <div class="a-sec-desc">Brute-force detectado. Bloqueio após 5 tentativas.</div>
-                    </div>
-                    <div class="a-sec-card warning">
-                        <div class="a-sec-icon">⚠️</div>
-                        <div class="a-sec-title">Logins Suspeitos</div>
-                        <div class="a-sec-value" style="color:var(--ay)">2</div>
-                        <div class="a-sec-desc">Geolocalização fora do padrão nas últimas 24h.</div>
-                    </div>
-                    <div class="a-sec-card ok">
-                        <div class="a-sec-icon">🛡️</div>
-                        <div class="a-sec-title">Rate Limit Ativo</div>
-                        <div class="a-sec-value" style="color:var(--ag)">OK</div>
-                        <div class="a-sec-desc">100 req/min por IP. 10 req/min no endpoint auth.</div>
-                    </div>
-                </div>
-                <div class="a-section-header"><span class="a-section-title">// Protocolos de segurança</span></div>
-                <div class="a-table-wrap" style="margin-bottom:1.5rem">
-                    <div class="a-toggle-list">
-                        <div class="a-toggle-row">
-                            <div class="a-toggle-info">
-                                <div class="a-toggle-name">Rate Limiting por IP</div>
-                                <div class="a-toggle-desc">Limite de 100 req/min. Bloqueia IPs abusivos automaticamente.
-                                </div>
-                            </div><label class="a-toggle"><input type="checkbox" checked
-                                    onchange="aToast('Salvo!')"><span class="a-toggle-slider"></span></label>
-                        </div>
-                        <div class="a-toggle-row">
-                            <div class="a-toggle-info">
-                                <div class="a-toggle-name">Bloqueio brute-force (5 tentativas)</div>
-                                <div class="a-toggle-desc">IP bloqueado por 15 min após 5 falhas de login consecutivas.
-                                </div>
-                            </div><label class="a-toggle"><input type="checkbox" checked
-                                    onchange="aToast('Salvo!')"><span class="a-toggle-slider"></span></label>
-                        </div>
-                        <div class="a-toggle-row">
-                            <div class="a-toggle-info">
-                                <div class="a-toggle-name">JWT com expiração curta (15min)</div>
-                                <div class="a-toggle-desc">Access token expira em 15 min. Refresh token com rotação
-                                    automática.</div>
-                            </div><label class="a-toggle"><input type="checkbox" checked
-                                    onchange="aToast('Salvo!')"><span class="a-toggle-slider"></span></label>
-                        </div>
-                        <div class="a-toggle-row">
-                            <div class="a-toggle-info">
-                                <div class="a-toggle-name">HTTPS obrigatório (HSTS)</div>
-                                <div class="a-toggle-desc">Strict-Transport-Security max-age=31536000. Sem fallback
-                                    HTTP.</div>
-                            </div><label class="a-toggle"><input type="checkbox" checked
-                                    onchange="aToast('Salvo!')"><span class="a-toggle-slider"></span></label>
-                        </div>
-                        <div class="a-toggle-row">
-                            <div class="a-toggle-info">
-                                <div class="a-toggle-name">Cabeçalhos de segurança (CSP / X-Frame-Options)</div>
-                                <div class="a-toggle-desc">Content-Security-Policy, X-Content-Type-Options,
-                                    X-Frame-Options: DENY.</div>
-                            </div><label class="a-toggle"><input type="checkbox" checked
-                                    onchange="aToast('Salvo!')"><span class="a-toggle-slider"></span></label>
-                        </div>
-                        <div class="a-toggle-row">
-                            <div class="a-toggle-info">
-                                <div class="a-toggle-name">Sanitização de inputs (XSS / SQL Injection)</div>
-                                <div class="a-toggle-desc">Todos os inputs sanitizados. Queries parametrizadas no banco.
-                                </div>
-                            </div><label class="a-toggle"><input type="checkbox" checked
-                                    onchange="aToast('Salvo!')"><span class="a-toggle-slider"></span></label>
-                        </div>
-                        <div class="a-toggle-row">
-                            <div class="a-toggle-info">
-                                <div class="a-toggle-name">2FA obrigatório para Admin</div>
-                                <div class="a-toggle-desc">Autenticação de dois fatores mandatória para qualquer acesso
-                                    admin.</div>
-                            </div><label class="a-toggle"><input type="checkbox" checked
-                                    onchange="aToast('Salvo!')"><span class="a-toggle-slider"></span></label>
-                        </div>
-                        <div class="a-toggle-row">
-                            <div class="a-toggle-info">
-                                <div class="a-toggle-name">Alertas por email de login anômalo</div>
-                                <div class="a-toggle-desc">Email automático ao usuário em login de novo IP/país/device.
-                                </div>
-                            </div><label class="a-toggle"><input type="checkbox" checked
-                                    onchange="aToast('Salvo!')"><span class="a-toggle-slider"></span></label>
-                        </div>
-                        <div class="a-toggle-row">
-                            <div class="a-toggle-info">
-                                <div class="a-toggle-name">Rotação automática de API Key (30 dias)</div>
-                                <div class="a-toggle-desc">A chave da Anthropic é rotacionada automaticamente a cada 30
-                                    dias.</div>
-                            </div><label class="a-toggle"><input type="checkbox"
-                                    onchange="aToast('Ativado! Próxima: 28/05')"><span
-                                    class="a-toggle-slider"></span></label>
-                        </div>
-                        <div class="a-toggle-row">
-                            <div class="a-toggle-info">
-                                <div class="a-toggle-name">Modo manutenção (bloquear requisições externas)</div>
-                                <div class="a-toggle-desc">Bloqueia todas as requisições. Use apenas para atualizações
-                                    críticas.</div>
-                            </div><label class="a-toggle"><input type="checkbox"
-                                    onchange="aToast('Modo manutenção ativado!')"><span
-                                    class="a-toggle-slider"></span></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="a-section-header"><span class="a-section-title">// IPs bloqueados</span><button
-                        class="a-btn-sm danger" onclick="aToast('Todos IPs limpos!')">Limpar todos</button></div>
+                <div class="a-sec-grid" id="sec-summary"></div>
+                <div class="a-section-header"><span class="a-section-title">// IPs Bloqueados</span><button
+                        class="a-btn-sm" onclick="loadBlockedIPs()">↻ Atualizar</button></div>
                 <div class="a-table-wrap">
                     <table class="a-tbl">
                         <thead>
@@ -3672,33 +3432,7 @@
                                 <th>Ação</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="a-mono">185.220.101.47</td>
-                                <td>Brute-force</td>
-                                <td class="a-mono" style="color:var(--ar)">18</td>
-                                <td class="a-mono">28/04 08:41</td>
-                                <td class="a-mono">28/04 09:41</td>
-                                <td><button class="a-btn-sm" onclick="aToast('Desbloqueado!')">Desbloquear</button></td>
-                            </tr>
-                            <tr>
-                                <td class="a-mono">45.33.32.156</td>
-                                <td>Enumeração</td>
-                                <td class="a-mono" style="color:var(--ay)">7</td>
-                                <td class="a-mono">27/04 22:15</td>
-                                <td class="a-mono">Permanente</td>
-                                <td><button class="a-btn-sm danger" onclick="aToast('Banimento permanente!')">Banir
-                                        perm.</button></td>
-                            </tr>
-                            <tr>
-                                <td class="a-mono">198.199.89.4</td>
-                                <td>Scraping</td>
-                                <td class="a-mono" style="color:var(--ay)">312 req/min</td>
-                                <td class="a-mono">27/04 18:02</td>
-                                <td class="a-mono">28/04 18:02</td>
-                                <td><button class="a-btn-sm" onclick="aToast('Desbloqueado!')">Desbloquear</button></td>
-                            </tr>
-                        </tbody>
+                        <tbody id="blocked-ips-table"></tbody>
                     </table>
                 </div>
             </div>
@@ -3706,7 +3440,7 @@
             <!-- LOGS -->
             <div class="a-view" id="a-view-logs">
                 <div class="a-filters">
-                    <select class="a-filter-select" id="a-log-level" onchange="aFilterLogs()">
+                    <select class="a-filter-select" id="a-log-level" onchange="loadLogs()">
                         <option value="">Todos</option>
                         <option>INFO</option>
                         <option>WARN</option>
@@ -3714,16 +3448,14 @@
                         <option>BLOCK</option>
                     </select>
                     <input class="a-filter-input" type="text" placeholder="IP ou usuário..." id="a-log-search"
-                        oninput="aFilterLogs()">
-                    <button class="a-btn-sm" onclick="aToast('Logs exportados!')">Exportar .log</button>
+                        oninput="loadLogs()">
                 </div>
                 <div class="a-table-wrap" id="a-logs-container"></div>
             </div>
-
         </main>
-    </div><!-- /page-admin -->
+    </div>
 
-    <!-- MODAIS ADMIN -->
+    <!-- MODAIS -->
     <div class="a-modal-overlay" id="ma-add-client">
         <div class="a-modal">
             <div class="a-modal-header"><span class="a-modal-title">// Novo cliente</span><button class="a-modal-close"
@@ -3731,388 +3463,175 @@
             <div class="a-modal-body">
                 <div class="a-form-row">
                     <div class="a-form-group"><label class="a-form-label">Nome</label><input class="a-form-input"
-                            type="text" placeholder="Rafael Silva"></div>
+                            id="nc-name" type="text" placeholder="Rafael Silva"></div>
                     <div class="a-form-group"><label class="a-form-label">Email</label><input class="a-form-input"
-                            type="email" placeholder="rafael@empresa.com"></div>
+                            id="nc-email" type="email" placeholder="rafael@empresa.com"></div>
                 </div>
                 <div class="a-form-row">
-                    <div class="a-form-group"><label class="a-form-label">Plano</label><select class="a-form-select">
-                            <option>Free</option>
-                            <option selected>Pro</option>
-                            <option>Time</option>
+                    <div class="a-form-group"><label class="a-form-label">Plano</label><select class="a-form-select"
+                            id="nc-plan">
+                            <option value="free">Free</option>
+                            <option value="pro" selected>Pro</option>
+                            <option value="time">Time</option>
                         </select></div>
-                    <div class="a-form-group"><label class="a-form-label">Status</label><select class="a-form-select">
-                            <option>Ativo</option>
-                            <option>Trial</option>
+                    <div class="a-form-group"><label class="a-form-label">Status</label><select class="a-form-select"
+                            id="nc-status">
+                            <option value="active">Ativo</option>
+                            <option value="trial">Trial</option>
                         </select></div>
                 </div>
                 <div class="a-form-group"><label class="a-form-label">Empresa</label><input class="a-form-input"
-                        type="text" placeholder="GrowthCo Ltda"></div>
+                        id="nc-company" type="text" placeholder="GrowthCo Ltda"></div>
             </div>
-            <div class="a-modal-footer"><button class="a-btn-sm"
-                    onclick="aCloseModal('ma-add-client')">Cancelar</button><button class="a-btn-sm primary"
-                    onclick="aCloseModal('ma-add-client');aToast('Cliente criado!')">Criar</button></div>
-        </div>
-    </div>
-
-    <div class="a-modal-overlay" id="ma-add-credits">
-        <div class="a-modal">
-            <div class="a-modal-header"><span class="a-modal-title">// Adicionar créditos</span><button
-                    class="a-modal-close" onclick="aCloseModal('ma-add-credits')">✕</button></div>
-            <div class="a-modal-body">
-                <div class="a-form-group"><label class="a-form-label">Email</label><input class="a-form-input"
-                        type="email" placeholder="email@cliente.com"></div>
-                <div class="a-form-group"><label class="a-form-label">Créditos</label><input class="a-form-input"
-                        type="number" value="10"></div>
-                <div class="a-form-group"><label class="a-form-label">Motivo</label><select class="a-form-select">
-                        <option>Cortesia</option>
-                        <option>Compensação</option>
-                        <option>Campanha</option>
-                    </select></div>
+            <div class="a-modal-footer">
+                <button class="a-btn-sm" onclick="aCloseModal('ma-add-client')">Cancelar</button>
+                <button class="a-btn-sm primary" onclick="createClient()">Criar</button>
             </div>
-            <div class="a-modal-footer"><button class="a-btn-sm"
-                    onclick="aCloseModal('ma-add-credits')">Cancelar</button><button class="a-btn-sm primary"
-                    onclick="aCloseModal('ma-add-credits');aToast('Créditos adicionados!')">Confirmar</button></div>
-        </div>
-    </div>
-
-    <div class="a-modal-overlay" id="ma-coupon">
-        <div class="a-modal">
-            <div class="a-modal-header"><span class="a-modal-title">// Criar cupom</span><button class="a-modal-close"
-                    onclick="aCloseModal('ma-coupon')">✕</button></div>
-            <div class="a-modal-body">
-                <div class="a-form-row">
-                    <div class="a-form-group"><label class="a-form-label">Código</label><input class="a-form-input"
-                            type="text" placeholder="PROMO30"></div>
-                    <div class="a-form-group"><label class="a-form-label">Desconto %</label><input class="a-form-input"
-                            type="number" value="30"></div>
-                </div>
-                <div class="a-form-row">
-                    <div class="a-form-group"><label class="a-form-label">Duração (meses)</label><input
-                            class="a-form-input" type="number" value="1"></div>
-                    <div class="a-form-group"><label class="a-form-label">Limite usos</label><input class="a-form-input"
-                            type="number" value="50"></div>
-                </div>
-            </div>
-            <div class="a-modal-footer"><button class="a-btn-sm"
-                    onclick="aCloseModal('ma-coupon')">Cancelar</button><button class="a-btn-sm primary"
-                    onclick="aCloseModal('ma-coupon');aToast('Cupom criado!')">Criar</button></div>
         </div>
     </div>
 
     <div class="a-toast" id="a-toast"></div>
 
     <script>
-        /* ══════════════════════════════════════
-           ROUTER — controla qual "página" aparece
-        ══════════════════════════════════════ */
+        // ═══════════════════════════════════════════════
+        //  CONFIG
+        // ═══════════════════════════════════════════════
+        const API = ''; // mesmo domínio
+        let userToken = localStorage.getItem('pp_token') || null;
+        let adminToken = sessionStorage.getItem('pp_admin_token') || null;
+        let currentUser = null;
+        let appHistory = [];
+
+        // ─── ROUTER ─────────────────────────────────────
         function showPage(id) {
-            document.querySelectorAll('.page, #page-login, #page-admin').forEach(el => {
-                el.classList.remove('active');
-            });
-            const el = document.getElementById(id);
-            if (el) el.classList.add('active');
+            document.querySelectorAll('.page, #page-login, #page-admin, #page-auth').forEach(el => el.classList.remove('active'));
+            document.getElementById(id)?.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
-        /* ── LANDING ── */
         function showLanding() {
             showPage('page-landing');
             document.getElementById('view-landing').style.display = 'block';
             document.getElementById('view-app').style.display = 'none';
             document.getElementById('nav-landing-links').style.display = 'flex';
             document.getElementById('nav-app-links').style.display = 'none';
+            document.getElementById('nav-hamburger').style.display = '';
         }
+        // Fix anchor scrolling — only works when landing is visible
+        document.addEventListener('click', e => {
+            const a = e.target.closest('a[href^="#"]');
+            if (!a) return;
+            const id = a.getAttribute('href').slice(1);
+            const el = document.getElementById(id);
+            if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        });
         function showApp() {
             showPage('page-landing');
             document.getElementById('view-landing').style.display = 'none';
             document.getElementById('view-app').style.display = 'block';
             document.getElementById('nav-landing-links').style.display = 'none';
             document.getElementById('nav-app-links').style.display = 'flex';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.getElementById('nav-hamburger').style.display = 'none';
+            if (currentUser) {
+                document.getElementById('nav-user-info').textContent = currentUser.name;
+                document.getElementById('credits-display').textContent = currentUser.credits;
+                document.getElementById('credits-max-display').textContent = currentUser.plan === 'free' ? '10' : '∞';
+            }
+        }
+        function goToAdminLogin() { showPage('page-login'); document.getElementById('admin-email')?.focus(); }
+
+        // ─── USER AUTH ───────────────────────────────────
+        function handleAppAccess() {
+            if (userToken) { loadCurrentUser().then(showApp); }
+            else { showPage('page-auth'); authSwitchTab('register'); }
         }
 
-        /* ── ADMIN ACESSO ── */
-        function goToLogin() {
-            showPage('page-login');
-            document.getElementById('login-user').focus();
+        function authSwitchTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('auth-register-form').style.display = tab === 'register' ? 'block' : 'none';
+            document.getElementById('auth-login-form').style.display = tab === 'login' ? 'block' : 'none';
+            event?.target?.classList.add('active');
+            if (tab === 'register') document.querySelectorAll('.auth-tab')[0].classList.add('active');
+            else document.querySelectorAll('.auth-tab')[1].classList.add('active');
         }
-        function backToLanding() {
+
+        async function doRegister() {
+            const name = document.getElementById('reg-name').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const pass = document.getElementById('reg-pass').value;
+            const errEl = document.getElementById('auth-reg-error');
+            const sucEl = document.getElementById('auth-reg-success');
+            errEl.classList.remove('show'); sucEl.classList.remove('show');
+            const btn = document.getElementById('reg-btn');
+            btn.disabled = true; btn.textContent = 'Criando conta...';
+            try {
+                const r = await fetch(`${API}/api/auth/register`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password: pass })
+                });
+                const data = await r.json();
+                if (!r.ok) { errEl.textContent = data.error; errEl.classList.add('show'); return; }
+                userToken = data.token;
+                currentUser = data.user;
+                localStorage.setItem('pp_token', userToken);
+                sucEl.textContent = 'Conta criada! Abrindo o app...'; sucEl.classList.add('show');
+                setTimeout(showApp, 800);
+            } catch { errEl.textContent = 'Erro de conexão. Tente novamente.'; errEl.classList.add('show'); }
+            finally { btn.disabled = false; btn.textContent = 'Criar conta grátis'; }
+        }
+
+        async function doUserLogin() {
+            const email = document.getElementById('login-email').value.trim();
+            const pass = document.getElementById('login-pass-user').value;
+            const errEl = document.getElementById('auth-login-error');
+            errEl.classList.remove('show');
+            const btn = document.getElementById('login-btn');
+            btn.disabled = true; btn.textContent = 'Entrando...';
+            try {
+                const r = await fetch(`${API}/api/auth/login`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password: pass })
+                });
+                const data = await r.json();
+                if (!r.ok) { errEl.textContent = data.error; errEl.classList.add('show'); return; }
+                userToken = data.token;
+                currentUser = data.user;
+                localStorage.setItem('pp_token', userToken);
+                showApp();
+            } catch { errEl.textContent = 'Erro de conexão.'; errEl.classList.add('show'); }
+            finally { btn.disabled = false; btn.textContent = 'Entrar'; }
+        }
+
+        async function loadCurrentUser() {
+            if (!userToken) return;
+            try {
+                const r = await fetch(`${API}/api/auth/me`, { headers: { Authorization: `Bearer ${userToken}` } });
+                if (!r.ok) { userToken = null; localStorage.removeItem('pp_token'); return; }
+                const d = await r.json();
+                currentUser = d.user;
+            } catch { }
+        }
+
+        function doUserLogout() {
+            userToken = null; currentUser = null;
+            localStorage.removeItem('pp_token');
             showLanding();
         }
 
-        /* ══════════════════════════════════════
-           LOGIN COM SEGURANÇA ANTI BRUTE-FORCE
-        ══════════════════════════════════════ */
-        // Credenciais — em produção real, isso fica no servidor
-        const ADMIN_USER = 'admin';
-        const ADMIN_PASS = 'pulse@2025'; // ← troque aqui
-
-        let loginAttempts = 0;
-        const MAX_ATTEMPTS = 5;
-        const LOCKOUT_SECONDS = 15 * 60; // 15 minutos
-        let lockoutUntil = null;
-        let lockoutInterval = null;
-
-        function doLogin() {
-            // Checa lockout
-            if (lockoutUntil && Date.now() < lockoutUntil) {
-                document.getElementById('lockout-msg').classList.add('show');
-                return;
-            }
-
-            const user = document.getElementById('login-user').value.trim();
-            const pass = document.getElementById('login-pass').value;
-            const errEl = document.getElementById('login-error');
-            const attemptEl = document.getElementById('login-attempt-txt');
-
-            if (user === ADMIN_USER && pass === ADMIN_PASS) {
-                // Sucesso
-                loginAttempts = 0;
-                errEl.classList.remove('show');
-                attemptEl.textContent = '';
-                // Registra sessão (sessionStorage — expira ao fechar aba)
-                sessionStorage.setItem('pp_admin_auth', '1');
-                sessionStorage.setItem('pp_admin_ts', Date.now().toString());
-                enterAdmin();
-            } else {
-                loginAttempts++;
-                errEl.classList.add('show');
-
-                const restantes = MAX_ATTEMPTS - loginAttempts;
-                if (restantes > 0) {
-                    attemptEl.textContent = `Tentativas restantes: ${restantes}`;
-                } else {
-                    // Lockout
-                    lockoutUntil = Date.now() + LOCKOUT_SECONDS * 1000;
-                    document.getElementById('login-form-area').style.opacity = '.3';
-                    document.getElementById('login-form-area').style.pointerEvents = 'none';
-                    document.getElementById('lockout-msg').classList.add('show');
-                    startCountdown();
-                }
-                // Limpa senha
-                document.getElementById('login-pass').value = '';
-            }
+        // ─── CHECKOUT MERCADO PAGO ───────────────────────
+        async function handleCheckout(plan) {
+            if (!userToken) { showPage('page-auth'); authSwitchTab('login'); return; }
+            try {
+                const r = await fetch(`${API}/api/payment/checkout`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${userToken}` },
+                    body: JSON.stringify({ plan })
+                });
+                const d = await r.json();
+                if (!r.ok) { alert(d.error); return; }
+                window.open(d.checkoutUrl, '_blank');
+            } catch { alert('Erro ao iniciar checkout.'); }
         }
 
-        function startCountdown() {
-            lockoutInterval = setInterval(() => {
-                const rem = Math.max(0, lockoutUntil - Date.now());
-                if (rem === 0) {
-                    clearInterval(lockoutInterval);
-                    lockoutUntil = null;
-                    loginAttempts = 0;
-                    document.getElementById('login-form-area').style.opacity = '1';
-                    document.getElementById('login-form-area').style.pointerEvents = '';
-                    document.getElementById('lockout-msg').classList.remove('show');
-                    document.getElementById('login-attempt-txt').textContent = '';
-                    return;
-                }
-                const m = Math.floor(rem / 60000).toString().padStart(2, '0');
-                const s = Math.floor((rem % 60000) / 1000).toString().padStart(2, '0');
-                document.getElementById('lockout-timer').textContent = `${m}:${s}`;
-            }, 1000);
-        }
-
-        function enterAdmin() {
-            showPage('page-admin');
-            initAdmin();
-        }
-
-        function doLogout() {
-            sessionStorage.removeItem('pp_admin_auth');
-            sessionStorage.removeItem('pp_admin_ts');
-            showLanding();
-        }
-
-        // Auto-restaurar sessão admin se aba ainda aberta (validade 4h)
-        window.addEventListener('DOMContentLoaded', () => {
-            const auth = sessionStorage.getItem('pp_admin_auth');
-            const ts = parseInt(sessionStorage.getItem('pp_admin_ts') || '0');
-            if (auth === '1' && Date.now() - ts < 4 * 3600 * 1000) {
-                enterAdmin();
-            }
-        });
-
-        // Atalho de teclado: Ctrl+Shift+A
-        document.addEventListener('keydown', e => {
-            if (e.ctrlKey && e.shiftKey && e.key === 'A') goToLogin();
-        });
-
-        /* ══════════════════════════════════════
-           ADMIN — INIT & VIEWS
-        ══════════════════════════════════════ */
-        let adminReady = false;
-        function initAdmin() {
-            if (adminReady) return;
-            adminReady = true;
-            buildMrrChart();
-            aRenderClients(aClientsData);
-            aRenderLogs(aLogsData);
-            setInterval(updateAdminClock, 1000);
-            updateAdminClock();
-        }
-
-        function updateAdminClock() {
-            const el = document.getElementById('a-clock');
-            if (el) el.textContent = new Date().toLocaleTimeString('pt-BR', { hour12: false });
-        }
-
-        function showAdminView(name, el) {
-            document.querySelectorAll('.a-view').forEach(v => v.classList.remove('active'));
-            document.querySelectorAll('.a-nav-item').forEach(n => n.classList.remove('active'));
-            document.getElementById('a-view-' + name).classList.add('active');
-            if (el) el.classList.add('active');
-            document.getElementById('a-topbar-title').textContent = '// ' + name;
-        }
-
-        /* ── MRR CHART ── */
-        function buildMrrChart() {
-            const data = [2100, 2450, 2800, 3100, 3400, 3820, 4271];
-            const months = ['Out', 'Nov', 'Dez', 'Jan', 'Fev', 'Mar', 'Abr'];
-            const max = Math.max(...data);
-            const el = document.getElementById('a-mrr-chart');
-            if (!el) return;
-            data.forEach((v, i) => {
-                const bar = document.createElement('div');
-                bar.className = 'a-bar';
-                bar.style.height = (v / max * 100) + '%';
-                bar.style.opacity = i === data.length - 1 ? '1' : '.55';
-                bar.title = 'R$' + v.toLocaleString('pt-BR');
-                const lbl = document.createElement('div');
-                lbl.className = 'a-bar-label';
-                lbl.textContent = months[i];
-                bar.appendChild(lbl);
-                el.appendChild(bar);
-            });
-        }
-
-        /* ── CLIENTS DATA ── */
-        const aClientsData = [
-            { name: 'Rafael Silva', email: 'rafael.s@growthco.com', plan: 'Pro', status: 'Ativo', credits: '∞', mrr: 'R$97', since: 'Jan/25' },
-            { name: 'Marina Costa', email: 'marina.c@agencia.io', plan: 'Pro', status: 'Ativo', credits: '∞', mrr: 'R$97', since: 'Fev/25' },
-            { name: 'Thiago Lima', email: 'thiago.l@consult.com', plan: 'Time', status: 'Ativo', credits: '∞', mrr: 'R$297', since: 'Dez/24' },
-            { name: 'João Mendes', email: 'joao.m@empresa.com', plan: 'Pro', status: 'Inadimplente', credits: '∞', mrr: 'R$97', since: 'Mar/25' },
-            { name: 'Clara Ferreira', email: 'clara.f@startup.co', plan: 'Pro', status: 'Trial', credits: '4', mrr: 'R$97', since: 'Abr/25' },
-            { name: 'Pedro Alves', email: 'pedro.a@vendas.me', plan: 'Time', status: 'Ativo', credits: '∞', mrr: 'R$297', since: 'Jan/25' },
-            { name: 'Ana Borges', email: 'ana.b@freelancer.me', plan: 'Free', status: 'Cancelado', credits: '0', mrr: '—', since: 'Nov/24' },
-            { name: 'Lucas Viana', email: 'lucas.v@saas.io', plan: 'Pro', status: 'Ativo', credits: '∞', mrr: 'R$97', since: 'Mar/25' },
-            { name: 'Beatriz Mota', email: 'beatriz.m@mkt.me', plan: 'Free', status: 'Trial', credits: '7', mrr: '—', since: 'Abr/25' },
-            { name: 'Sergio Kato', email: 'sergio.k@digital.co', plan: 'Pro', status: 'Inadimplente', credits: '∞', mrr: 'R$97', since: 'Fev/25' },
-            { name: 'Fernanda Ramos', email: 'fernanda.r@hr.io', plan: 'Free', status: 'Ativo', credits: '10', mrr: '—', since: 'Abr/25' },
-            { name: 'Diego Costa', email: 'diego.c@b2b.me', plan: 'Pro', status: 'Ativo', credits: '∞', mrr: 'R$97', since: 'Jan/25' },
-        ];
-
-        function planBadge(p) {
-            const cls = p === 'Pro' ? 'badge-green' : p === 'Time' ? 'badge-blue' : 'badge-gray';
-            return `<span class="badge ${cls}">${p}</span>`;
-        }
-        function statusBadge(s) {
-            const cls = s === 'Ativo' ? 'badge-green' : s === 'Trial' ? 'badge-yellow' : s === 'Inadimplente' ? 'badge-red' : 'badge-gray';
-            return `<span class="badge ${cls}">${s}</span>`;
-        }
-        function aRenderClients(data) {
-            const tbody = document.getElementById('a-clients-table');
-            if (!tbody) return;
-            if (!data.length) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--amuted);padding:2rem;font-family:var(--mono)">Nenhum resultado.</td></tr>'; return; }
-            tbody.innerHTML = data.map(c => `
-    <tr>
-      <td><div style="font-weight:500">${c.name}</div><div style="font-size:11px;color:var(--amuted);font-family:var(--mono)">${c.email}</div></td>
-      <td>${planBadge(c.plan)}</td>
-      <td>${statusBadge(c.status)}</td>
-      <td class="a-mono">${c.credits}</td>
-      <td class="a-mono" style="color:var(--ag)">${c.mrr}</td>
-      <td class="a-mono" style="color:var(--amuted)">${c.since}</td>
-      <td style="display:flex;gap:.4rem">
-        <button class="a-btn-sm" onclick="aToast('Editando...')">Editar</button>
-        <button class="a-btn-sm danger" onclick="aToast('Suspenso!')">Suspender</button>
-      </td>
-    </tr>`).join('');
-        }
-        function aFilterClients() {
-            const q = document.getElementById('a-search-clients').value.toLowerCase();
-            const p = document.getElementById('a-filter-plan').value;
-            const s = document.getElementById('a-filter-status').value;
-            aRenderClients(aClientsData.filter(c =>
-                (!q || c.name.toLowerCase().includes(q) || c.email.toLowerCase().includes(q)) &&
-                (!p || c.plan === p) && (!s || c.status === s)
-            ));
-        }
-
-        /* ── LOGS DATA ── */
-        const aLogsData = [
-            { time: '14:22:01', level: 'INFO', msg: 'Login bem-sucedido', ip: '200.158.34.12', user: 'rafael.s@growthco.com' },
-            { time: '14:15:43', level: 'INFO', msg: 'Mensagem gerada (Pro)', ip: '187.9.211.88', user: 'thiago.l@consult.com' },
-            { time: '14:08:22', level: 'WARN', msg: '5 tentativas de login falhas', ip: '185.220.101.47', user: 'unknown' },
-            { time: '13:55:11', level: 'BLOCK', msg: 'IP bloqueado por brute-force', ip: '185.220.101.47', user: '—' },
-            { time: '13:45:02', level: 'INFO', msg: 'Pagamento confirmado (Pro)', ip: '192.168.1.1', user: 'marina.c@agencia.io' },
-            { time: '13:30:45', level: 'WARN', msg: 'Login de IP incomum (NZ)', ip: '103.220.1.19', user: 'lucas.v@saas.io' },
-            { time: '13:12:08', level: 'ERROR', msg: 'Falha na cobrança — cartão recusado', ip: '10.0.0.1', user: 'joao.m@empresa.com' },
-            { time: '12:45:55', level: 'INFO', msg: 'Upgrade Free → Pro confirmado', ip: '200.158.12.9', user: 'clara.f@startup.co' },
-            { time: '11:50:33', level: 'BLOCK', msg: 'Scraping — rate limit atingido', ip: '198.199.89.4', user: '—' },
-            { time: '11:20:04', level: 'WARN', msg: 'Token JWT expirado', ip: '200.158.34.12', user: 'pedro.a@vendas.me' },
-            { time: '09:05:17', level: 'INFO', msg: 'Cancelamento de assinatura', ip: '187.9.210.11', user: 'ana.b@freelancer.me' },
-            { time: '08:41:30', level: 'BLOCK', msg: 'IP bloqueado — enumeração', ip: '45.33.32.156', user: '—' },
-        ];
-
-        function levelBadge(l) {
-            const cls = l === 'INFO' ? 'badge-blue' : l === 'WARN' ? 'badge-yellow' : 'badge-red';
-            return `<span class="badge ${cls}">${l}</span>`;
-        }
-        function aRenderLogs(data) {
-            const el = document.getElementById('a-logs-container');
-            if (!el) return;
-            el.innerHTML = data.length
-                ? data.map(l => `<div class="a-log-entry"><div class="a-log-time">${l.time}</div><div>${levelBadge(l.level)}</div><div><div class="a-log-msg">${l.msg} · <span style="color:var(--amuted)">${l.user}</span></div><div class="a-log-ip">${l.ip}</div></div></div>`).join('')
-                : '<div style="padding:2rem;text-align:center;color:var(--amuted);font-family:var(--mono)">Nenhum log encontrado.</div>';
-        }
-        function aFilterLogs() {
-            const lvl = document.getElementById('a-log-level').value;
-            const q = document.getElementById('a-log-search').value.toLowerCase();
-            aRenderLogs(aLogsData.filter(l =>
-                (!lvl || l.level === lvl) &&
-                (!q || l.ip.includes(q) || l.user.toLowerCase().includes(q) || l.msg.toLowerCase().includes(q))
-            ));
-        }
-
-        /* ── FATURAMENTO TABS ── */
-        function aTab(el, id) {
-            document.querySelectorAll('#a-view-faturamento .a-tab').forEach(t => t.classList.remove('active'));
-            el.classList.add('active');
-            ['fat-trans', 'fat-faturas', 'fat-pix'].forEach(t => {
-                document.getElementById(t).style.display = t === id ? 'block' : 'none';
-            });
-        }
-
-        /* ── MODAIS ── */
-        function aOpenModal(id) { document.getElementById(id).classList.add('open'); }
-        function aCloseModal(id) { document.getElementById(id).classList.remove('open'); }
-        document.querySelectorAll('.a-modal-overlay').forEach(m => {
-            m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
-        });
-
-        /* ── TOAST ── */
-        function aToast(msg) {
-            const t = document.getElementById('a-toast');
-            t.textContent = msg;
-            t.classList.add('show');
-            setTimeout(() => t.classList.remove('show'), 2800);
-        }
-
-        /* ── EXPORT CSV ── */
-        function exportCSV() {
-            const rows = [['Nome', 'Email', 'Plano', 'Status', 'MRR', 'Desde']];
-            aClientsData.forEach(c => rows.push([c.name, c.email, c.plan, c.status, c.mrr, c.since]));
-            const csv = rows.map(r => r.join(',')).join('\n');
-            const a = document.createElement('a');
-            a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
-            a.download = 'prospectpulse_clientes.csv';
-            a.click();
-        }
-
-        /* ══════════════════════════════════════
-           APP — geração de mensagens (original)
-        ══════════════════════════════════════ */
+        // ─── GERAÇÃO DE MENSAGENS ────────────────────────
         document.querySelectorAll('#channel-row .pill').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('#channel-row .pill').forEach(b => b.classList.remove('active'));
@@ -4126,9 +3645,6 @@
             });
         });
 
-        let credits = 10;
-        let history = [];
-
         async function generate() {
             const lead = document.getElementById('lead-input').value.trim();
             const product = document.getElementById('product-input').value.trim();
@@ -4136,33 +3652,34 @@
             const tone = document.querySelector('#tone-row .pill.tone-active')?.dataset.tone || 'consultivo';
             if (!lead) { alert('Cole o perfil do lead primeiro.'); return; }
             if (!product) { alert('Descreva seu produto/serviço.'); return; }
-            if (credits <= 0) { alert('Créditos esgotados. Faça upgrade para continuar.'); return; }
+
             const btn = document.getElementById('gen-btn');
             btn.disabled = true; btn.textContent = 'Gerando...';
-            const out = document.getElementById('output-area');
-            out.innerHTML = '<div class="loading-row"><div class="ld"><span></span><span></span><span></span></div><span>Analisando perfil e gerando mensagem personalizada...</span></div>';
-            const multi = channel === 'todos';
-            const chLabel = multi ? 'Todos os canais' : channel;
-            const system = `Você é especialista em prospecção B2B com 10 anos de experiência. Gera mensagens de cold outreach altamente personalizadas, que nunca parecem template. Sempre em português brasileiro. Use detalhes específicos do perfil do lead. Nunca use "espero que esteja bem", "gostaria de apresentar" ou qualquer frase genérica. Vá direto ao ponto de dor do lead.`;
-            const prompt = multi
-                ? `Perfil do lead: ${lead}\n\nMeu produto/serviço: ${product}\n\nTom: ${tone}\n\nGere 3 mensagens — uma para cada canal. Formate exatamente assim:\n\n[EMAIL]\nAssunto: ...\n(corpo)\n\n[LINKEDIN]\n(até 300 caracteres)\n\n[WHATSAPP]\n(informal, até 200 caracteres)`
-                : `Perfil do lead: ${lead}\n\nMeu produto/serviço: ${product}\n\nCanal: ${channel}\nTom: ${tone}\n\n${channel === 'email' ? 'Gere email com assunto (primeira linha: "Assunto: ...") e corpo.' : channel === 'linkedin' ? 'Gere mensagem LinkedIn (até 300 caracteres, sem assunto).' : 'Gere mensagem WhatsApp (informal, até 200 caracteres).'}\n\nSeja específico ao perfil. Zero frases genéricas.`;
+            document.getElementById('output-area').innerHTML = '<div class="loading-row"><div class="ld"><span></span><span></span><span></span></div><span>Analisando perfil e gerando mensagem personalizada...</span></div>';
+
             try {
-                const res = await fetch('https://api.anthropic.com/v1/messages', {
+                const r = await fetch(`${API}/api/generate`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, system, messages: [{ role: 'user', content: prompt }] })
+                    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${userToken}` },
+                    body: JSON.stringify({ lead, product, channel, tone })
                 });
-                const data = await res.json();
-                const text = data.content?.map(b => b.text || '').join('') || '';
-                credits--;
-                document.getElementById('credits-display').textContent = credits;
-                if (multi) renderMulti(text);
-                else renderSingle(text, channel);
-                history.unshift({ lead: lead.substring(0, 42) + (lead.length > 42 ? '...' : ''), channel: chLabel });
+                const data = await r.json();
+                if (!r.ok) {
+                    if (r.status === 402) {
+                        document.getElementById('output-area').innerHTML = `<div class="error-box">Créditos esgotados. <a onclick="handleCheckout('pro')" style="cursor:pointer;text-decoration:underline">Faça upgrade para Pro →</a></div>`;
+                        return;
+                    }
+                    document.getElementById('output-area').innerHTML = `<div class="error-box">${data.error}</div>`;
+                    return;
+                }
+                document.getElementById('credits-display').textContent = data.credits;
+                if (currentUser) currentUser.credits = data.credits;
+                if (channel === 'todos') renderMulti(data.text);
+                else renderSingle(data.text, channel);
+                appHistory.unshift({ lead: lead.substring(0, 42) + (lead.length > 42 ? '...' : ''), channel });
                 renderHistory();
-            } catch (e) {
-                out.innerHTML = '<div class="error-box">Erro ao conectar com a IA. Verifique sua conexão e tente novamente.</div>';
+            } catch {
+                document.getElementById('output-area').innerHTML = '<div class="error-box">Erro de conexão. Verifique e tente novamente.</div>';
             }
             btn.disabled = false; btn.textContent = 'Gerar mensagem →';
         }
@@ -4183,20 +3700,403 @@
             document.getElementById('output-area').innerHTML = `<div class="divider"></div><div class="output-hdr"><span class="output-hdr-title">3 versões geradas</span><button class="copy-all-btn" onclick="copyText(this,'${escQ(text)}')">Copiar tudo</button></div>${cards}`;
         }
         function renderHistory() {
-            if (!history.length) return;
-            const items = history.slice(0, 5).map(i => `<div class="history-item"><div class="history-dot"></div><span class="history-name">${esc(i.lead)}</span><span class="history-ch">${i.channel}</span></div>`).join('');
+            if (!appHistory.length) return;
+            const items = appHistory.slice(0, 5).map(i => `<div class="history-item"><div class="history-dot"></div><span class="history-name">${esc(i.lead)}</span><span class="history-ch">${i.channel}</span></div>`).join('');
             document.getElementById('history-area').innerHTML = `<div class="divider"></div><div class="history-section"><div class="history-title">Histórico desta sessão</div>${items}</div>`;
         }
         function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
         function escQ(t) { return String(t).replace(/\\/g, '\\\\').replace(/'/g, "\\'"); }
         async function copyText(btn, text) {
-            try {
-                await navigator.clipboard.writeText(text);
-                const o = btn.textContent;
-                btn.textContent = 'Copiado!';
-                setTimeout(() => btn.textContent = o, 1500);
-            } catch (e) { }
+            try { await navigator.clipboard.writeText(text); const o = btn.textContent; btn.textContent = 'Copiado!'; setTimeout(() => btn.textContent = o, 1500); } catch { }
         }
+
+        // ═══════════════════════════════════════════════
+        //  ADMIN — LOGIN
+        // ═══════════════════════════════════════════════
+        let adminLoginAttempts = 0;
+        let adminLockoutUntil = null;
+        let adminLockInterval = null;
+
+        async function doAdminLogin() {
+            if (adminLockoutUntil && Date.now() < adminLockoutUntil) return;
+            const email = document.getElementById('admin-email').value.trim();
+            const pass = document.getElementById('admin-pass').value;
+            const errEl = document.getElementById('login-error');
+            errEl.classList.remove('show');
+            try {
+                const r = await fetch(`${API}/api/admin/login`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password: pass })
+                });
+                const data = await r.json();
+                if (!r.ok) {
+                    adminLoginAttempts++;
+                    errEl.classList.add('show');
+                    const rem = 5 - adminLoginAttempts;
+                    if (rem > 0) document.getElementById('login-attempt-txt').textContent = `Tentativas restantes: ${rem}`;
+                    else {
+                        adminLockoutUntil = Date.now() + 15 * 60 * 1000;
+                        document.getElementById('login-form-area').style.opacity = '.3';
+                        document.getElementById('login-form-area').style.pointerEvents = 'none';
+                        document.getElementById('lockout-msg').classList.add('show');
+                        startAdminLockdown();
+                    }
+                    document.getElementById('admin-pass').value = '';
+                    return;
+                }
+                adminToken = data.token;
+                sessionStorage.setItem('pp_admin_token', adminToken);
+                const ad = data.admin;
+                document.getElementById('admin-name-display').textContent = ad.name;
+                document.getElementById('admin-avatar').textContent = ad.name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+                enterAdmin();
+            } catch { errEl.textContent = 'Erro de conexão.'; errEl.classList.add('show'); }
+        }
+
+        function startAdminLockdown() {
+            adminLockInterval = setInterval(() => {
+                const rem = Math.max(0, adminLockoutUntil - Date.now());
+                if (rem === 0) {
+                    clearInterval(adminLockInterval);
+                    adminLockoutUntil = null; adminLoginAttempts = 0;
+                    document.getElementById('login-form-area').style.opacity = '1';
+                    document.getElementById('login-form-area').style.pointerEvents = '';
+                    document.getElementById('lockout-msg').classList.remove('show');
+                    document.getElementById('login-attempt-txt').textContent = '';
+                    return;
+                }
+                const m = Math.floor(rem / 60000).toString().padStart(2, '0');
+                const s = Math.floor((rem % 60000) / 1000).toString().padStart(2, '0');
+                document.getElementById('lockout-timer').textContent = `${m}:${s}`;
+            }, 1000);
+        }
+
+        function enterAdmin() {
+            showPage('page-admin');
+            setInterval(updateAdminClock, 1000); updateAdminClock();
+            loadDashboard();
+        }
+
+        function doAdminLogout() {
+            adminToken = null;
+            sessionStorage.removeItem('pp_admin_token');
+            showLanding();
+        }
+
+        // ═══════════════════════════════════════════════
+        //  ADMIN — API CALLS
+        // ═══════════════════════════════════════════════
+        async function adminFetch(path, opts = {}) {
+            const r = await fetch(`${API}${path}`, {
+                ...opts,
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${adminToken}`, ...(opts.headers || {}) }
+            });
+            if (r.status === 403) { doAdminLogout(); return null; }
+            return r.json();
+        }
+
+        async function loadDashboard() {
+            const d = await adminFetch('/api/admin/dashboard');
+            if (!d) return;
+            document.getElementById('d-mrr').textContent = `R$${d.mrr.toLocaleString('pt-BR')}`;
+            document.getElementById('d-active').textContent = d.activeUsers;
+            document.getElementById('d-msgs').textContent = d.todayMsgs.toLocaleString('pt-BR');
+            document.getElementById('d-blocked').textContent = d.blockedIPs;
+            document.getElementById('d-tokens').textContent = (d.todayTokens / 1000).toFixed(1) + 'K';
+            document.getElementById('d-tokens-cost').textContent = `Custo: ~R$${(d.todayTokens * 0.000015).toFixed(2)}`;
+
+            const total = d.freeUsers + d.proUsers + d.timeUsers || 1;
+            document.getElementById('d-plan-dist').innerHTML = [
+                { name: 'Free', n: d.freeUsers, color: 'var(--amuted2)' },
+                { name: 'Pro', n: d.proUsers, color: 'var(--ag)' },
+                { name: 'Time', n: d.timeUsers, color: 'var(--ab)' },
+            ].map(p => `<div class="a-plan-row">
+    <div class="a-plan-name">${p.name}</div>
+    <div class="a-plan-bar-bg"><div class="a-plan-bar-fill" style="width:${(p.n / total * 100).toFixed(0)}%;background:${p.color}"></div></div>
+    <div class="a-plan-pct">${(p.n / total * 100).toFixed(0)}%</div>
+  </div>`).join('');
+
+            document.getElementById('d-events-list').innerHTML = d.recentEvents.length
+                ? d.recentEvents.map(e => `<div class="a-log-entry">
+        <div class="a-log-time">${e.created_at?.substring(11, 19) || '—'}</div>
+        <div>${levelBadge(e.level)}</div>
+        <div><div class="a-log-msg">${esc(e.action)} · <span style="color:var(--amuted)">${esc(e.user_email || '—')}</span></div>
+        <div class="a-log-ip">${esc(e.ip || '—')}</div></div>
+      </div>`).join('')
+                : '<div style="padding:2rem;text-align:center;color:var(--amuted);font-family:var(--mono)">Nenhum evento.</div>';
+        }
+
+        async function loadClients() {
+            const search = document.getElementById('a-search-clients').value;
+            const plan = document.getElementById('a-filter-plan').value;
+            const status = document.getElementById('a-filter-status').value;
+            const params = new URLSearchParams({ search, plan, status });
+            const d = await adminFetch(`/api/admin/users?${params}`);
+            if (!d) return;
+            const tbody = document.getElementById('a-clients-table');
+            tbody.innerHTML = d.users.length
+                ? d.users.map(u => `<tr>
+        <td><div style="font-weight:500">${esc(u.name)}</div><div style="font-size:11px;color:var(--amuted);font-family:var(--mono)">${esc(u.email)}</div></td>
+        <td>${planBadge(u.plan)}</td>
+        <td>${statusBadge(u.status)}</td>
+        <td class="a-mono">${u.credits === -1 ? '∞' : u.credits}</td>
+        <td class="a-mono" style="color:var(--amuted)">${esc(u.company || '—')}</td>
+        <td class="a-mono" style="color:var(--amuted)">${u.created_at?.substring(0, 10) || '—'}</td>
+        <td style="display:flex;gap:.4rem">
+          <button class="a-btn-sm danger" onclick="suspendUser(${u.id})">Suspender</button>
+          <button class="a-btn-sm primary" onclick="addCreditsTo(${u.id})">+Créditos</button>
+        </td>
+      </tr>`).join('')
+                : '<tr><td colspan="7" style="text-align:center;color:var(--amuted);padding:2rem;font-family:var(--mono)">Nenhum resultado.</td></tr>';
+        }
+
+        async function loadPayments() {
+            const d = await adminFetch('/api/admin/payments');
+            if (!d) return;
+            document.getElementById('p-mrr').textContent = `R$${(d.mrr || 0).toLocaleString('pt-BR')}`;
+            document.getElementById('p-pending').textContent = `R$${(d.pending || 0).toLocaleString('pt-BR')}`;
+            document.getElementById('p-total').textContent = d.payments.length;
+            document.getElementById('a-payments-table').innerHTML = d.payments.map(p => `<tr>
+    <td class="a-mono" style="font-size:11px">${esc(p.mp_pay_id || '—')}</td>
+    <td><div>${esc(p.name)}</div><div style="font-size:11px;color:var(--amuted)">${esc(p.email)}</div></td>
+    <td>${esc(p.description || '—')}</td>
+    <td class="a-mono" style="color:${p.status === 'approved' ? 'var(--ag)' : 'var(--ar)'}">R$${(p.amount || 0).toFixed(2)}</td>
+    <td>${esc(p.method || '—')}</td>
+    <td class="a-mono" style="color:var(--amuted)">${p.created_at?.substring(0, 10) || '—'}</td>
+    <td>${statusBadge(p.status)}</td>
+  </tr>`).join('') || '<tr><td colspan="7" style="text-align:center;color:var(--amuted);padding:2rem">Nenhum pagamento.</td></tr>';
+        }
+
+        async function loadUsage() {
+            const d = await adminFetch('/api/admin/usage');
+            if (!d) return;
+            document.getElementById('u-daily').textContent = d.daily;
+            document.getElementById('u-tokens').textContent = (d.tokens / 1000).toFixed(1) + 'K';
+            document.getElementById('u-cost').textContent = `R$${(d.tokens * 0.000015).toFixed(2)}`;
+            document.getElementById('u-zero').textContent = d.zeroCredits;
+            document.getElementById('u-top-table').innerHTML = d.topUsers.map(u => `<tr>
+    <td class="a-mono">${esc(u.email)}</td>
+    <td>${planBadge(u.plan)}</td>
+    <td class="a-mono">${u.msgs}</td>
+  </tr>`).join('');
+        }
+
+        async function loadBlockedIPs() {
+            const d = await adminFetch('/api/admin/blocked-ips');
+            if (!d) return;
+            document.getElementById('blocked-ips-table').innerHTML = d.ips.length
+                ? d.ips.map(ip => `<tr>
+        <td class="a-mono">${esc(ip.ip)}</td>
+        <td>${esc(ip.reason)}</td>
+        <td class="a-mono" style="color:var(--ar)">${ip.attempts}</td>
+        <td class="a-mono">${ip.created_at?.substring(0, 16) || '—'}</td>
+        <td class="a-mono">${ip.permanent ? 'Permanente' : (ip.expires_at?.substring(0, 16) || '—')}</td>
+        <td style="display:flex;gap:.4rem">
+          <button class="a-btn-sm" onclick="unblockIP('${esc(ip.ip)}')">Desbloquear</button>
+          ${!ip.permanent ? `<button class="a-btn-sm danger" onclick="permanentBan('${esc(ip.ip)}')">Banir perm.</button>` : ''}
+        </td>
+      </tr>`).join('')
+                : '<tr><td colspan="6" style="text-align:center;color:var(--amuted);padding:2rem;font-family:var(--mono)">Nenhum IP bloqueado.</td></tr>';
+
+            document.getElementById('sec-summary').innerHTML = `
+    <div class="a-sec-card alert"><div class="a-sec-icon">🚨</div><div class="a-sec-title">IPs Bloqueados</div><div class="a-sec-value" style="color:var(--ar)">${d.ips.length}</div><div class="a-sec-desc">Brute-force e scraping detectados.</div></div>
+    <div class="a-sec-card ok"><div class="a-sec-icon">🛡️</div><div class="a-sec-title">Rate Limit</div><div class="a-sec-value" style="color:var(--ag)">OK</div><div class="a-sec-desc">100 req/min por IP · 30 req/min geração.</div></div>
+    <div class="a-sec-card ok"><div class="a-sec-icon">🔑</div><div class="a-sec-title">JWT</div><div class="a-sec-value" style="color:var(--ag)">OK</div><div class="a-sec-desc">Tokens expiram em 4h. Validação ativa.</div></div>
+  `;
+        }
+
+        async function loadLogs() {
+            const level = document.getElementById('a-log-level').value;
+            const search = document.getElementById('a-log-search').value;
+            const params = new URLSearchParams({ level, search, limit: 50 });
+            const d = await adminFetch(`/api/admin/security-logs?${params}`);
+            if (!d) return;
+            document.getElementById('a-logs-container').innerHTML = d.logs.length
+                ? d.logs.map(l => `<div class="a-log-entry">
+        <div class="a-log-time">${l.created_at?.substring(11, 19) || '—'}</div>
+        <div>${levelBadge(l.level)}</div>
+        <div><div class="a-log-msg">${esc(l.action)} · <span style="color:var(--amuted)">${esc(l.user_email || '—')}</span></div>
+        <div class="a-log-ip">${esc(l.ip || '—')} ${l.details ? `· ${esc(l.details)}` : ''}</div></div>
+      </div>`).join('')
+                : '<div style="padding:2rem;text-align:center;color:var(--amuted);font-family:var(--mono)">Nenhum log.</div>';
+        }
+
+        async function suspendUser(id) {
+            if (!confirm('Suspender este usuário?')) return;
+            await adminFetch(`/api/admin/users/${id}/suspend`, { method: 'POST' });
+            aToast('Usuário suspenso!'); loadClients();
+        }
+
+        async function addCreditsTo(id) {
+            const amount = prompt('Quantos créditos adicionar?', '10');
+            if (!amount || isNaN(amount)) return;
+            await adminFetch(`/api/admin/users/${id}/credits`, { method: 'POST', body: JSON.stringify({ amount: Number(amount), reason: 'Cortesia' }) });
+            aToast(`+${amount} créditos adicionados!`); loadClients();
+        }
+
+        async function unblockIP(ip) {
+            await adminFetch(`/api/admin/blocked-ips/${encodeURIComponent(ip)}`, { method: 'DELETE' });
+            aToast('IP desbloqueado!'); loadBlockedIPs();
+        }
+
+        async function permanentBan(ip) {
+            if (!confirm(`Banir permanentemente ${ip}?`)) return;
+            await adminFetch(`/api/admin/blocked-ips/${encodeURIComponent(ip)}/permanent`, { method: 'POST' });
+            aToast('IP banido permanentemente!'); loadBlockedIPs();
+        }
+
+        async function createClient() {
+            const body = {
+                name: document.getElementById('nc-name').value,
+                email: document.getElementById('nc-email').value,
+                plan: document.getElementById('nc-plan').value,
+                status: document.getElementById('nc-status').value,
+                company: document.getElementById('nc-company').value,
+            };
+            const d = await adminFetch('/api/admin/users', { method: 'POST', body: JSON.stringify(body) });
+            if (d?.id) {
+                aCloseModal('ma-add-client');
+                aToast(`Cliente criado! Senha temp: ${d.tempPassword}`);
+                loadClients();
+            }
+        }
+
+        async function exportClientCSV() {
+            const d = await adminFetch('/api/admin/users?limit=9999');
+            if (!d) return;
+            const rows = [['Nome', 'Email', 'Plano', 'Status', 'Empresa', 'Desde']];
+            d.users.forEach(u => rows.push([u.name, u.email, u.plan, u.status, u.company || '', u.created_at?.substring(0, 10) || '']));
+            const csv = rows.map(r => r.join(',')).join('\n');
+            const a = document.createElement('a');
+            a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+            a.download = 'prospectpulse_clientes.csv';
+            a.click();
+            aToast('CSV exportado!');
+        }
+
+        // ─── ADMIN NAVIGATION ────────────────────────────
+        function showAdminView(name, el) {
+            document.querySelectorAll('.a-view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.a-nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById('a-view-' + name).classList.add('active');
+            el?.classList.add('active');
+            document.getElementById('a-topbar-title').textContent = '// ' + name;
+            if (name === 'clientes') loadClients();
+            if (name === 'pagamentos') loadPayments();
+            if (name === 'uso') loadUsage();
+            if (name === 'seguranca') loadBlockedIPs();
+            if (name === 'logs') loadLogs();
+        }
+
+        // ─── HELPERS ─────────────────────────────────────
+        function updateAdminClock() {
+            const el = document.getElementById('a-clock');
+            if (el) el.textContent = new Date().toLocaleTimeString('pt-BR', { hour12: false });
+        }
+        function planBadge(p) {
+            const m = { pro: 'badge-green', time: 'badge-blue', free: 'badge-gray', trial: 'badge-yellow' };
+            return `<span class="badge ${m[p] || 'badge-gray'}">${p}</span>`;
+        }
+        function statusBadge(s) {
+            const m = { active: 'badge-green', trial: 'badge-yellow', suspended: 'badge-red', cancelled: 'badge-gray', approved: 'badge-green', pending: 'badge-yellow', rejected: 'badge-red', refunded: 'badge-gray' };
+            return `<span class="badge ${m[s] || 'badge-gray'}">${s}</span>`;
+        }
+        function levelBadge(l) {
+            const m = { INFO: 'badge-blue', WARN: 'badge-yellow', ERROR: 'badge-red', BLOCK: 'badge-red' };
+            return `<span class="badge ${m[l] || 'badge-gray'}">${l}</span>`;
+        }
+        function aOpenModal(id) { document.getElementById(id).classList.add('open'); }
+        function aCloseModal(id) { document.getElementById(id).classList.remove('open'); }
+        document.querySelectorAll('.a-modal-overlay').forEach(m => {
+            m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
+        });
+        function aToast(msg) {
+            const t = document.getElementById('a-toast');
+            t.textContent = msg; t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2800);
+        }
+
+        // ─── MOBILE MENU ─────────────────────────────────
+        function toggleMobileMenu() {
+            document.getElementById('nav-mobile-menu').classList.toggle('open');
+        }
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') document.getElementById('nav-mobile-menu')?.classList.remove('open');
+        });
+
+        // ─── DEMO ANIMATION ──────────────────────────────
+        const demoMsgs = [
+            { tag: 'Email gerado', html: '<strong>Assunto: SPIN Selling funciona — até travar no meio do funil</strong><br><br>João, vi seus posts sobre SPIN Selling e o foco em qualificação que você está levando para a TechCorp. A maioria das dores em SaaS B2B não está na geração de lead — está na conversão depois da descoberta...' },
+            { tag: 'LinkedIn gerado', html: 'João, seus posts sobre qualificação mostram que você sabe que o problema não é gerar lead — é converter depois da descoberta. Trabalhamos com 3 SaaS B2B que tinham exatamente esse gargalo. Posso compartilhar o que funcionou em 90 dias?' },
+            { tag: 'WhatsApp gerado', html: 'Oi João! Vi que você trabalha com SPIN na TechCorp 👋 Tenho um caso de +45% conversão inbound em SaaS B2B que pode ser relevante pra vocês. Posso mandar um resumo de 2 min?' },
+        ];
+        let demoIdx = 0;
+        let demoAnimating = false;
+        function runDemoAnimation() {
+            if (demoAnimating) return;
+            const btn = document.getElementById('demo-gen-btn');
+            const box = document.getElementById('demo-output-box');
+            const txt = document.getElementById('demo-output-text');
+            const tag = box.querySelector('.demo-output-tag');
+            demoAnimating = true;
+            btn.textContent = 'Gerando...';
+            btn.style.opacity = '.6';
+            box.style.opacity = '0';
+            setTimeout(() => {
+                demoIdx = (demoIdx + 1) % demoMsgs.length;
+                const m = demoMsgs[demoIdx];
+                tag.textContent = m.tag;
+                txt.innerHTML = '';
+                box.style.opacity = '1';
+                box.style.transition = 'opacity .3s';
+                // typewriter effect
+                const plain = m.html.replace(/<[^>]+>/g, '');
+                let i = 0;
+                txt.innerHTML = m.html.substring(0, m.html.indexOf(plain.charAt(0)));
+                const interval = setInterval(() => {
+                    if (i >= plain.length) {
+                        clearInterval(interval);
+                        txt.innerHTML = m.html;
+                        btn.textContent = 'Gerar outra versão →';
+                        btn.style.opacity = '1';
+                        demoAnimating = false;
+                        // after 3 cycles, invite to sign up
+                        if (demoIdx === 0) {
+                            setTimeout(() => { btn.textContent = 'Testar grátis →'; btn.onclick = handleAppAccess; }, 1000);
+                        }
+                        return;
+                    }
+                    // find next real char position in html
+                    let htmlPos = 0, charCount = 0;
+                    while (htmlPos < m.html.length && charCount <= i) {
+                        if (m.html[htmlPos] === '<') { while (htmlPos < m.html.length && m.html[htmlPos] !== '>') htmlPos++; }
+                        else charCount++;
+                        htmlPos++;
+                    }
+                    txt.innerHTML = m.html.substring(0, htmlPos);
+                    i++;
+                }, 12);
+            }, 600);
+        }
+
+        // ─── ATALHO TECLADO (admin) ───────────────────────────────────
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') goToAdminLogin();
+        });
+
+        // ─── INIT ────────────────────────────────────────
+        window.addEventListener('DOMContentLoaded', async () => {
+            // Restaurar sessão admin
+            if (adminToken) {
+                showPage('page-admin');
+                setInterval(updateAdminClock, 1000); updateAdminClock();
+                loadDashboard();
+                return;
+            }
+            // Restaurar sessão usuário
+            if (userToken) { await loadCurrentUser(); }
+            showLanding();
+        });
     </script>
 </body>
 

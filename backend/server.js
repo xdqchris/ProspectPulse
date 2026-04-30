@@ -22,7 +22,7 @@ app.get('/api/test', (req, res) => {
   res.json({ message: 'API funcionando!', timestamp: new Date().toISOString() });
 });
 
-// Rota para verificar usuário
+// Rota para verificar usuário (simulada, sem banco)
 app.get('/api/user/:email', (req, res) => {
   res.json({ exists: false, plan: 'free', credits: 10 });
 });
@@ -36,7 +36,16 @@ app.post('/api/asaas/create-subscription', (req, res) => {
   });
 });
 
-// Para qualquer outra rota, enviar o index.html (SPA)
+// Rota para registrar usuário (simulada)
+app.post('/api/user/register', (req, res) => {
+  const { name, email } = req.body;
+  res.json({
+    success: true,
+    user: { id: Date.now(), name, email, plan: 'free', credits: 10 }
+  });
+});
+
+// Para qualquer outra rota, enviar o index.html
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
