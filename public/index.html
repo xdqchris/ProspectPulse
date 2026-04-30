@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ProspectPulse</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 { color: #667eea; }
+        .status {
+            background: #48bb78;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .status.error {
+            background: #e53e3e;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #5a67d8; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 ProspectPulse</h1>
+        <p>IA para prospecção B2B</p>
+        <div class="status" id="status">🔄 Verificando API...</div>
+        <button onclick="testAPI()">📡 Testar API</button>
+        <button onclick="location.reload()">🔄 Recarregar</button>
+    </div>
+
+    <script>
+        const API_URL = window.location.origin;
+
+        async function testAPI() {
+            try {
+                const response = await fetch(`${API_URL}/api/test`);
+                const data = await response.json();
+                alert('✅ API funcionando!\n' + JSON.stringify(data));
+            } catch (error) {
+                alert('❌ API offline\n\nCertifique-se que o servidor está rodando.\nNo terminal: cd backend && npm start');
+            }
+        }
+
+        // Verificar API ao carregar
+        fetch(`${API_URL}/api/user/test@test.com`)
+            .then(res => res.json())
+            .then(data => {
+                const statusEl = document.getElementById('status');
+                statusEl.innerHTML = '✅ API Conectada! Servidor rodando normalmente.';
+                statusEl.className = 'status';
+            })
+            .catch(() => {
+                const statusEl = document.getElementById('status');
+                statusEl.innerHTML = '❌ API offline! Execute no terminal: cd backend && npm start';
+                statusEl.className = 'status error';
+            });
+    </script>
+</body>
+</html>
